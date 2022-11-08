@@ -1,0 +1,306 @@
+﻿  <!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-blue elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+        <img src="~/adminlte/dist/img/credit/ninooFeliz.jpg" alt=" "
+             class="brand-image img-circle elevation-3"
+             style="opacity: .8">
+        <span class="brand-text font-weight-bolder">Niño Feliz</span>
+    </a>
+    <!-- Sidebar Menu -->
+    @*<h5 style="color:white;margin-left:10px;">Bienvenida (o) @SD.NombreUsuario</h5>*@
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
+            role="menu" data-accordion="true">
+            <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+            @*tipoUsuarioId = 1=Admin 2=Registrador 3=Proveedor 4=Cliente*@
+
+            @*@if (SD.Admin || SD.Proveedor || SD.Registrador)
+        {*@
+            <li class="nav-item has-treeview menu-close" aria-expanded="false">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-wrench"></i>
+                    <p>
+                        Gestiones de datos personales
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Parentezco"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-store"></i>
+                            <p>Parentezco</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Encargado"
+                           asp-action="Index" class="nav-link">
+                            <i class="fa fa-bars"></i>
+                            <p>Encargado</p>
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Abonadore"
+                           asp-action="Index" class="nav-link">
+                            <i class="fa fa-search-plus"></i>
+                            <p>Abonador</p>
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Ninno"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-tshirt"></i>
+                            <p>Niño</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="NinnoEncargado"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-tshirt"></i>
+                            <p>Niño Encargado</p>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>
+
+            <li class="nav-item has-treeview menu-close" aria-expanded="false">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-wrench"></i>
+                    <p>
+                        Transacciones
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Matricula"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-store"></i>
+                            <p>Matricula</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="RegistroBaja"
+                           asp-action="Index" class="nav-link">
+                            <i class="fa fa-bars"></i>
+                            <p>Registro de baja</p>
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="EncargadoMatricula"
+                           asp-action="Index" class="nav-link">
+                            <i class="fa fa-search-plus"></i>
+                            <p>Encargado de matricula</p>
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="EncargadoRegistroDeBaja"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-tshirt"></i>
+                            <p>Encargado registro de baja</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="AbonadorCargoMensuale"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-tshirt"></i>
+                            <p>Abonador cargo mensuales</p>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>
+            @*}
+
+        if (SD.Cliente || SD.Admin)
+        {*@
+            <li class="nav-item has-treeview menu-close">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-map-marker-question"></i>
+                    <p>
+                        Gestiones internas
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Asistencia"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-store"></i>
+                            <p>Asistencia</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="UsoComedore"
+                           asp-action="Index" class="nav-link">
+                            <i class="fa fa-bars"></i>
+                            <p>Uso de comedor</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="CargoMensuale"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-tshirt"></i>
+                            <p>Cargo mensual</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-treeview menu-close" aria-expanded="false">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-wrench"></i>
+                    <p>
+                        Gestiones de menus
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Ingrediente"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-store"></i>
+                            <p>Ingrediente</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Plato"
+                           asp-action="Index" class="nav-link">
+                            <i class="fa fa-bars"></i>
+                            <p>Plato</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Menu"
+                           asp-action="Index" class="nav-link">
+                            <i class="fa fa-search-plus"></i>
+                            <p>Abonador</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="PlatoIngrediente"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-tshirt"></i>
+                            <p>Plato Ingrediente</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="MenuPlato"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-tshirt"></i>
+                            <p>MenuPlato</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="NinnoMenu"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-tshirt"></i>
+                            <p>NinnoMenu</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item has-treeview menu-close" aria-expanded="false">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-wrench"></i>
+                    <p>
+                        Gestiones de las alergias
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="TipoAlergia"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-store"></i>
+                            <p>TipoAlergia</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Alergia"
+                           asp-action="Index" class="nav-link">
+                            <i class="fa fa-bars"></i>
+                            <p>Alergia</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="NinnoAlergiaIngrediente"
+                           asp-action="Index" class="nav-link">
+                            <i class="fa fa-search-plus"></i>
+                            <p>Niño alergia ingrediente</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="NaiPlato"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-tshirt"></i>
+                            <p>NaiPlato</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @*}
+        @if (SD.Admin || SD.Registrador)
+        {*@
+            <li class="nav-item has-treeview menu-close">
+                <a href="#" class="nav-link active">
+                    <i class="fas fa-user-shield"></i>
+                    <p>
+                        Administración
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="TipoUsuarios"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-user-cog"></i>
+                            <p>Roles</p>
+                        </a>
+                    </li>
+
+
+
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Usuarios"
+                           asp-action="Index" class="nav-link">
+                            <i class="fas fa-user-friends"></i>
+                            <p>Usuarios</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            @*}*@
+            <li class="nav-item">
+                <a asp-area="" asp-controller="Login"
+                   asp-action="CerrarSesion" class="nav-link">
+                    <i class="fas fa-user-friends"></i>
+                    <p>Cerrar sesión</p>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+    <!-- /.sidebar -->
+</aside>

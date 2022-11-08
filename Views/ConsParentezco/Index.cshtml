@@ -1,0 +1,27 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.Parentezco>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Consulta Parentezco</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DetallePar)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DetallePar)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

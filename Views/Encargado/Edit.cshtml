@@ -1,0 +1,67 @@
+﻿@model WebNinnoFeliz.Models.Encargado
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Encargado</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdEncargado" />
+            <div class="form-group">
+                <label asp-for="IdentificacionEncargado" class="control-label"></label>
+                <input asp-for="IdentificacionEncargado" class="form-control" />
+                <span asp-validation-for="IdentificacionEncargado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreEncargado" class="control-label"></label>
+                <input asp-for="NombreEncargado" class="form-control" />
+                <span asp-validation-for="NombreEncargado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apell1Encargado" class="control-label"></label>
+                <input asp-for="Apell1Encargado" class="form-control" />
+                <span asp-validation-for="Apell1Encargado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apell2Encargado" class="control-label"></label>
+                <input asp-for="Apell2Encargado" class="form-control" />
+                <span asp-validation-for="Apell2Encargado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TelefonoEncargado" class="control-label"></label>
+                <input asp-for="TelefonoEncargado" class="form-control" />
+                <span asp-validation-for="TelefonoEncargado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DirecciónEncargado" class="control-label"></label>
+                <input asp-for="DirecciónEncargado" class="form-control" />
+                <span asp-validation-for="DirecciónEncargado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdParentezco" class="control-label"></label>
+                <select asp-for="IdParentezco" class="form-control" asp-items="ViewBag.IdParentezco"></select>
+                <span asp-validation-for="IdParentezco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <a asp-action="Index" class="btn btn-dark">Back to List</a>
+            </div>
+            <div class="form-group">
+                <input />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.Ninno>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tabla de niño</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                IdNiño
+            </th>
+            <th>
+                IdentificacionNiño
+                @*@Html.DisplayNameFor(model => model.IdentificacionNinno)*@
+            </th>
+            <th>
+                NombreNiño
+                @*@Html.DisplayNameFor(model => model.NombreNinno)*@
+            </th>
+            <th>
+                Apell1Niño
+                @*@Html.DisplayNameFor(model => model.Apell1Ninno)*@
+            </th>
+            <th>
+                Apell2Niño
+                @*@Html.DisplayNameFor(model => model.Apell2Ninno)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th>
+                DireccionNiño
+                @*@Html.DisplayNameFor(model => model.DireccionNinno)*@
+            </th>
+            <th>
+                Genero
+                @*@Html.DisplayNameFor(model => model.IdGeneroNavigation)*@
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentificacionNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell1Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell2Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DireccionNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdGeneroNavigation.DetalleGen)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdNinno" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdNinno" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdNinno" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

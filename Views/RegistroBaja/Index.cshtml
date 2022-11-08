@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.RegistroBaja>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tabla de registro baja</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdRegistroBaja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaBaja)
+            </th>
+            <th>
+            Identificacion Niño
+            </th>
+            <th>
+                Nombre niño
+            </th>
+            <th>
+                Apellido1 niño
+            </th>
+            <th>
+                Apellido2 niño
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdRegistroBaja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaBaja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.IdentificacionNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdRegistroBaja" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdRegistroBaja" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdRegistroBaja" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

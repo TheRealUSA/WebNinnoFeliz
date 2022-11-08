@@ -1,0 +1,85 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.Encargado>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tabla de encargado</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEncargado)
+            </th>
+            <th>
+                Identificacion
+                @*@Html.DisplayNameFor(model => model.IdentificacionEncargado)*@
+            </th>
+            <th>
+                Nombre
+                @*@Html.DisplayNameFor(model => model.NombreEncargado)*@
+            </th>
+            <th>
+                Primer apellido
+                @*@Html.DisplayNameFor(model => model.Apell1Encargado)*@
+            </th>
+            <th>
+                Segundo apellido
+                @*@Html.DisplayNameFor(model => model.Apell2Encargado)*@
+            </th>
+            <th>
+                Telefono
+                @*@Html.DisplayNameFor(model => model.TelefonoEncargado)*@
+            </th>
+            <th>
+                Dirreccion
+                @*@Html.DisplayNameFor(model => model.DirecciónEncargado)*@
+            </th>
+            <th>
+                Parentezco
+                @*@Html.DisplayNameFor(model => model.IdParentezcoNavigation)*@
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentificacionEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell1Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell2Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelefonoEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DirecciónEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdParentezcoNavigation.DetallePar)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdEncargado" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdEncargado" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEncargado" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

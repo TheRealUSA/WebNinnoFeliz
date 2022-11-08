@@ -1,0 +1,31 @@
+﻿@model WebNinnoFeliz.Models.EncargadoMatricula
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>EncargadoMatricula</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IdEncargadoNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IdEncargadoNavigation.Apell1Encargado)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroMatriculaNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumeroMatriculaNavigation.NumeroMatricula)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdEncargadoMatricula" class="btn btn-success">Editar</a> |
+    <a asp-action="Index" class="btn btn-dark">Back to List</a>
+</div>

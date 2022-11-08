@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.Parentezco>
+@{
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_Sty.cshtml";
+}
+
+<h1>Reporte Parentezco</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DetallePar)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DetallePar)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

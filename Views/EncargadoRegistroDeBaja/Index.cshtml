@@ -1,0 +1,85 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.EncargadoRegistroDeBaja>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tabla de Encargado de baja</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                IdEncargadoBaja
+            </th>
+            <th>
+                Identificacion Encargado
+            </th>
+            <th>
+                Nombre Encargado
+            </th>
+            <th>
+                Apellido1 Encargado
+            </th>
+            <th>
+                Apellido Encargado
+            </th>
+            <th>
+                Parentezco
+            </th>
+            <th>
+                Fecha de baja
+            </th>
+            <th>
+                ID Niño
+            </th>
+            <th>
+                Id baja
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoRegistroBaja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdParentezco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdRegistroBajaNavigation.FechaBaja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdRegistroBajaNavigation.IdNinno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdRegistroBaja)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdEncargadoRegistroBaja" class="btn btn-success">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdEncargadoRegistroBaja" class="btn btn-info">Detalle</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdEncargadoRegistroBaja" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.UsoComedore>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadDias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdMesNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNinnoNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadDias)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdMesNavigation.NombreMes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdUsoComedor">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdUsoComedor">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdUsoComedor">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

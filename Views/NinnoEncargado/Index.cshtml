@@ -1,0 +1,94 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.NinnoEncargado>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tabla de niños y su encargados</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                IdNiñoEncargado
+                @*@Html.DisplayNameFor(model => model.IdNinnoEncargado)*@
+            </th>
+            <th>
+                Identificacion Encargado
+                @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
+            </th>
+            <th>
+                Nombre Encargado
+                @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
+            </th>
+            <th>
+                Apellido1 Encargado
+                @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
+            </th>
+            <th>
+                Apellido2 Encargado
+                @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
+            </th>
+            <th> 
+                <a class="nav-link text-white" asp-area="" asp-controller="Parentezco" asp-action="Index">Parentezco</a>
+            </th>
+            <th>
+                Nombre niño
+                @*@Html.DisplayNameFor(model => model.IdNinnoNavigation)*@
+            </th>
+            <th>
+                Apellido1 niño
+                @*@Html.DisplayNameFor(model => model.IdNinnoNavigation)*@
+            </th>
+            <th>
+                Apellido2 niño
+                @*@Html.DisplayNameFor(model => model.IdNinnoNavigation)*@
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdParentezco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdNinnoEncargado" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdNinnoEncargado" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdNinnoEncargado" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
