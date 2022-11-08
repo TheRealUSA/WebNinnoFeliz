@@ -5,29 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Tabla de Uso del Comedor</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a> 
 </p>
 <table class="table">
-    <thead>
+    <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CantidadDias)
+                @Html.DisplayNameFor(model => model.IdUsoComedor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdMesNavigation)
+                Cantidad de Días
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdNinnoNavigation)
+                Id Mes
             </th>
-            <th></th>
+            <th>
+                Id Niño
+            </th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUsoComedor)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CantidadDias)
             </td>
@@ -38,9 +44,9 @@
                 @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUsoComedor">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUsoComedor">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUsoComedor">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdUsoComedor">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdUsoComedor">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdUsoComedor">Borrar</a>
             </td>
         </tr>
 }

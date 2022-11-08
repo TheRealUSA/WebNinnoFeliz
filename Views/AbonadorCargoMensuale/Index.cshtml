@@ -5,26 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Tabla de Abonador Cargo Mensual</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdAbonadorNavigation)
+                @Html.DisplayNameFor(model => model.IdAbonadorCargoMensual)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdCargoNavigation)
+                Id Abonador
             </th>
-            <th></th>
+            <th>
+                Id Cargo
+            </th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAbonadorCargoMensual) 
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdAbonadorNavigation.IdAbonador)
             </td>
@@ -32,11 +39,11 @@
                 @Html.DisplayFor(modelItem => item.IdCargoNavigation.IdCargo)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdAbonadorCargoMensual">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdAbonadorCargoMensual">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdAbonadorCargoMensual">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdAbonadorCargoMensual">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdAbonadorCargoMensual">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdAbonadorCargoMensual">Borrar</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

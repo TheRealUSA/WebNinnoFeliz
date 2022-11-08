@@ -5,30 +5,36 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Tabla de Mes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a> 
 </p>
 <table class="table">
-    <thead>
+    <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NombreMes)
+                @Html.DisplayNameFor(model => model.IdMes)
             </th>
-            <th></th>
+            <th>
+                Nombre de Mes
+            </th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.IdMes)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.NombreMes)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdMes">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdMes">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdMes">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdMes">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdMes">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdMes">Borrar</a>
             </td>
         </tr>
 }
