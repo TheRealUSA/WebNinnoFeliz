@@ -5,32 +5,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Tabla de menú</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NombreMenu)
+                Id numero menú
             </th>
-            <th></th>
+            <th>
+                Nombre menú
+            </th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNumeroMenu)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NombreMenu)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdNumeroMenu">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdNumeroMenu">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdNumeroMenu">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdNumeroMenu"class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdNumeroMenu"class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdNumeroMenu"class="btn btn-danger">Borrar</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
