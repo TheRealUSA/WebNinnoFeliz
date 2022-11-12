@@ -8,19 +8,29 @@
 <h1>Tabla de Abonadores</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Nuevo</a> 
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    <a asp-action="PDF" class="btn btn-primary">PDF</a>
 </p>
 <table class="table">
     <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdAbonador) 
+                @Html.DisplayNameFor(model => model.IdAbonador)
             </th>
             <th>
-                Numero de Cuenta
+                NumeroCuenta
             </th>
             <th>
-                Id Encargado
+                IdEncargado
+            </th>
+            <th>
+                NombreEncargado
+            </th>
+            <th>
+                Apell1Encargado
+            </th>
+            <th>
+                Apell2Encargado
             </th>
             <th>Acciones</th>
         </tr>
@@ -29,18 +39,27 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdAbonador) 
+                @Html.DisplayFor(modelItem => item.IdAbonador)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumeroCuenta)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdAbonador">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdAbonador">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdAbonador">Borrar</a>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado) 
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdAbonador" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdAbonador" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdAbonador" class="btn btn-danger">Borrar</a>
             </td>
         </tr>
 }
