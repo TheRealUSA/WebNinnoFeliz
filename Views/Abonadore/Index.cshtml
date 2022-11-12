@@ -14,13 +14,22 @@
     <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdAbonador) 
+                @Html.DisplayNameFor(model => model.IdAbonador)
             </th>
             <th>
                 Numero de Cuenta
             </th>
             <th>
-                Id Encargado
+                Identificacion Encargado
+            </th>
+            <th>
+                Nombre Encargado
+            </th>
+            <th>
+                Apellido1 Encargado
+            </th>
+            <th>
+                Apellido2 Encargado
             </th>
             <th>Acciones</th>
         </tr>
@@ -29,13 +38,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdAbonador) 
+                @Html.DisplayFor(modelItem => item.IdAbonador)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumeroCuenta)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdAbonador">Editar</a> |

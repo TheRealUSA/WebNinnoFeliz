@@ -49,7 +49,7 @@ namespace WebNinnoFeliz.Controllers
         // GET: Abonadore/Create
         public IActionResult Create()
         {
-            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "Apell1Encargado");
+            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "IdentificacionEncargado");
             return View();
         }
 
@@ -76,7 +76,7 @@ namespace WebNinnoFeliz.Controllers
                 //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "Apell1Encargado", abonadore.IdEncargado);
+            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "IdentificacionEncargado", abonadore.IdEncargado);
             return View(abonadore);
         }
 
@@ -93,7 +93,7 @@ namespace WebNinnoFeliz.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "Apell1Encargado", abonadore.IdEncargado);
+            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "IdentificacionEncargado", abonadore.IdEncargado);
             return View(abonadore);
         }
 
@@ -139,7 +139,7 @@ namespace WebNinnoFeliz.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "Apell1Encargado", abonadore.IdEncargado);
+            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "IdentificacionEncargado", abonadore.IdEncargado);
             return View(abonadore);
         }
 
