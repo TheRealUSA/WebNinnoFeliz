@@ -11,23 +11,35 @@
     <h4>UsoComedor</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CantidadDias)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CantidadDias)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdMesNavigation)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdMesNavigation.NombreMes) 
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdMesNavigation.NombreMes)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdMesNavigation.NombreMes) 
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdNinnoNavigation)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNinnoNavigation.NombreNinno)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdNinnoNavigation.NombreNinno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNinnoNavigation.Apell1Ninno)
+        </dt>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdNinnoNavigation.Apell1Ninno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNinnoNavigation.Apell2Ninno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdNinnoNavigation.Apell2Ninno) 
         </dd>
     </dl>
 </div>
