@@ -17,7 +17,10 @@
                 ID NaiPlato
             </th>
             <th>
-               Niño alergia ingredientes
+                Id niño
+            </th>
+            <th>
+                Niño alergia ingredientes
             </th>
             <th>
                 Plato
@@ -34,15 +37,18 @@
             </td>
 
             <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoAlergiaIngredienteNavigation.IdNinno)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IdNinnoAlergiaIngredienteNavigation.IdNinnoAlergiaIngrediente)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdPlatoNavigation.NombrePlato)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdNaiplato"class="btn btn-success">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdNaiplato"class="btn btn-info">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdNaiplato"class="btn btn-danger">Borrar</a>
+                <a asp-action="Edit" asp-route-id="@item.IdNaiplato" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdNaiplato" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdNaiplato" class="btn btn-danger">Borrar</a>
         </tr>
         }
     </tbody>

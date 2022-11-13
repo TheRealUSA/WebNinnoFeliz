@@ -53,7 +53,7 @@ namespace WebNinnoFeliz.Controllers
         {
             ViewData["IdAlergia"] = new SelectList(_context.Alergias, "IdAlergia", "NombreAlergia");
             ViewData["IdIngrediente"] = new SelectList(_context.Ingredientes, "IdIngrediente", "NombreIngrediente");
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "NombreNinno");
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno");
             return View();
         }
 
@@ -82,7 +82,7 @@ namespace WebNinnoFeliz.Controllers
             }
             ViewData["IdAlergia"] = new SelectList(_context.Alergias, "IdAlergia", "NombreAlergia", ninnoAlergiaIngrediente.IdAlergia);
             ViewData["IdIngrediente"] = new SelectList(_context.Ingredientes, "IdIngrediente", "NombreIngrediente", ninnoAlergiaIngrediente.IdIngrediente);
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", ninnoAlergiaIngrediente.IdNinno);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", ninnoAlergiaIngrediente.IdNinno);
             return View(ninnoAlergiaIngrediente);
         }
 
@@ -101,7 +101,7 @@ namespace WebNinnoFeliz.Controllers
             }
             ViewData["IdAlergia"] = new SelectList(_context.Alergias, "IdAlergia", "NombreAlergia", ninnoAlergiaIngrediente.IdAlergia);
             ViewData["IdIngrediente"] = new SelectList(_context.Ingredientes, "IdIngrediente", "NombreIngrediente", ninnoAlergiaIngrediente.IdIngrediente);
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", ninnoAlergiaIngrediente.IdNinno);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", ninnoAlergiaIngrediente.IdNinno);
             return View(ninnoAlergiaIngrediente);
         }
 
@@ -150,7 +150,7 @@ namespace WebNinnoFeliz.Controllers
             }
             ViewData["IdAlergia"] = new SelectList(_context.Alergias, "IdAlergia", "NombreAlergia", ninnoAlergiaIngrediente.IdAlergia);
             ViewData["IdIngrediente"] = new SelectList(_context.Ingredientes, "IdIngrediente", "NombreIngrediente", ninnoAlergiaIngrediente.IdIngrediente);
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", ninnoAlergiaIngrediente.IdNinno);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", ninnoAlergiaIngrediente.IdNinno);
             return View(ninnoAlergiaIngrediente);
         }
 

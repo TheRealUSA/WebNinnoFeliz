@@ -51,12 +51,15 @@
                 @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IdNumeroMenuNavigation.NombreMenu)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdNinnoMenu"class="btn btn-success">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdNinnoMenu"class="btn btn-info">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdNinnoMenu"class="btn btn-danger">Borrar</a>
+                <a asp-action="Edit" asp-route-id="@item.IdNinnoMenu" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdNinnoMenu" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdNinnoMenu" class="btn btn-danger">Borrar</a>
             </td>
         </tr>
         }

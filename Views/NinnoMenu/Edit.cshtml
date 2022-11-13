@@ -24,6 +24,7 @@
                 <select asp-for="IdNinno" class="form-control" asp-items="ViewBag.IdNinno"></select>
                 <span asp-validation-for="IdNinno" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="IdNumeroMenu" class="control-label"></label>
                 <select asp-for="IdNumeroMenu" class="form-control" asp-items="ViewBag.IdNumeroMenu"></select>
@@ -37,7 +38,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index"class="btn btn-dark">Back to List</a>
 </div>
 
 @section Scripts {

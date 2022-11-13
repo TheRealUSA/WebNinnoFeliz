@@ -49,7 +49,7 @@ namespace WebNinnoFeliz.Controllers
         // GET: NinnoMenu/Create
         public IActionResult Create()
         {
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno");
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno");
             ViewData["IdNumeroMenu"] = new SelectList(_context.Menus, "IdNumeroMenu", "NombreMenu");
             return View();
         }
@@ -67,7 +67,7 @@ namespace WebNinnoFeliz.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", ninnoMenu.IdNinno);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", ninnoMenu.IdNinno);
             ViewData["IdNumeroMenu"] = new SelectList(_context.Menus, "IdNumeroMenu", "NombreMenu", ninnoMenu.IdNumeroMenu);
             return View(ninnoMenu);
         }
@@ -85,7 +85,7 @@ namespace WebNinnoFeliz.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", ninnoMenu.IdNinno);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", ninnoMenu.IdNinno);
             ViewData["IdNumeroMenu"] = new SelectList(_context.Menus, "IdNumeroMenu", "NombreMenu", ninnoMenu.IdNumeroMenu);
             return View(ninnoMenu);
         }
