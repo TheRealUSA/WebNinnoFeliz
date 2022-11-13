@@ -50,8 +50,8 @@ namespace WebNinnoFeliz.Controllers
         // GET: NinnoEncargado/Create
         public IActionResult Create()
         {
-            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "Apell1Encargado");
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "NombreNinno");
+            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "IdentificacionEncargado");
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno");
             return View();
         }
 
@@ -77,8 +77,8 @@ namespace WebNinnoFeliz.Controllers
                 //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "Apell1Encargado", ninnoEncargado.IdEncargado);
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "NombreNinno", ninnoEncargado.IdNinno);
+            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "IdentificacionEncargado", ninnoEncargado.IdEncargado);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", ninnoEncargado.IdNinno);
             return View(ninnoEncargado);
         }
 
@@ -95,8 +95,8 @@ namespace WebNinnoFeliz.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "Apell1Encargado", ninnoEncargado.IdEncargado);
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", ninnoEncargado.IdNinno);
+            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "IdentificacionEncargado", ninnoEncargado.IdEncargado);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", ninnoEncargado.IdNinno);
             return View(ninnoEncargado);
         }
 
@@ -142,8 +142,8 @@ namespace WebNinnoFeliz.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "Apell1Encargado", ninnoEncargado.IdEncargado);
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", ninnoEncargado.IdNinno);
+            ViewData["IdEncargado"] = new SelectList(_context.Encargados, "IdEncargado", "IdentificacionEncargado", ninnoEncargado.IdEncargado);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", ninnoEncargado.IdNinno);
             return View(ninnoEncargado);
         }
 
