@@ -1,5 +1,5 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.AbonadorCargoMensuale>
-
+﻿@model IEnumerable<WebNinnoFeliz.Models.AbonadorCargoMensuale> 
+ 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,6 +9,7 @@
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    <a asp-action="PDF" class="btn btn-primary">PDF</a>
 </p>
 <table class="table">
     <thead class="table-dark">
@@ -17,11 +18,17 @@
                 @Html.DisplayNameFor(model => model.IdAbonadorCargoMensual)
             </th>
             <th>
-                Id Abonador
+                IdEncargado
             </th>
             <th>
-                Id Cargo
+                NumeroCuenta
             </th>
+            <th>
+                CargoMensual
+            </th>
+         @* <th>
+                IdNiño
+            </th> *@
             <th>Acciones</th>
         </tr>
     </thead>
@@ -30,18 +37,24 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdAbonadorCargoMensual) 
+                @Html.DisplayFor(modelItem => item.IdAbonadorCargoMensual)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdAbonadorNavigation.IdAbonador)
+                @Html.DisplayFor(modelItem => item.IdAbonadorNavigation.IdEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAbonadorNavigation.NumeroCuenta)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdCargoNavigation.IdCargo)
             </td>
+         @* <td>
+                @Html.DisplayFor(modelItem => item.IdCargoNavigation.IdUsoComedorNavigation.IdNinno)
+            </td> *@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdAbonadorCargoMensual">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdAbonadorCargoMensual">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdAbonadorCargoMensual">Borrar</a>
+                <a asp-action="Edit" asp-route-id="@item.IdAbonadorCargoMensual" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdAbonadorCargoMensual" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdAbonadorCargoMensual" class="btn btn-danger">Borrar</a>
             </td>
         </tr>
         }

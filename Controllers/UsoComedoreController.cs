@@ -51,7 +51,7 @@ namespace WebNinnoFeliz.Controllers
         public IActionResult Create()
         {
             ViewData["IdMes"] = new SelectList(_context.Meses, "IdMes", "NombreMes");
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno");
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno");
             return View();
         }
 
@@ -80,7 +80,7 @@ namespace WebNinnoFeliz.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdMes"] = new SelectList(_context.Meses, "IdMes", "NombreMes", usoComedore.IdMes);
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", usoComedore.IdNinno);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", usoComedore.IdNinno);
             return View(usoComedore);
         }
 
@@ -98,7 +98,7 @@ namespace WebNinnoFeliz.Controllers
                 return NotFound();
             }
             ViewData["IdMes"] = new SelectList(_context.Meses, "IdMes", "NombreMes", usoComedore.IdMes);
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", usoComedore.IdNinno);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", usoComedore.IdNinno);
             return View(usoComedore);
         }
 
@@ -146,7 +146,7 @@ namespace WebNinnoFeliz.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdMes"] = new SelectList(_context.Meses, "IdMes", "NombreMes", usoComedore.IdMes);
-            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "Apell1Ninno", usoComedore.IdNinno);
+            ViewData["IdNinno"] = new SelectList(_context.Ninnos, "IdNinno", "IdentificacionNinno", usoComedore.IdNinno);
             return View(usoComedore);
         }
 

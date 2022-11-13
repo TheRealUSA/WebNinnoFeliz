@@ -8,7 +8,8 @@
 <h1>Tabla de Abonadores</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Nuevo</a> 
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    <a asp-action="PDF" class="btn btn-primary">PDF</a>
 </p>
 <table class="table">
     <thead class="table-dark">
@@ -17,19 +18,19 @@
                 @Html.DisplayNameFor(model => model.IdAbonador)
             </th>
             <th>
-                Numero de Cuenta
+                NumeroCuenta
             </th>
             <th>
-                Identificacion Encargado
+                IdEncargado
             </th>
             <th>
-                Nombre Encargado
+                NombreEncargado
             </th>
             <th>
-                Apellido1 Encargado
+                Apell1Encargado
             </th>
             <th>
-                Apellido2 Encargado
+               Id Encargado
             </th>
             <th>Acciones</th>
         </tr>
@@ -53,12 +54,12 @@
                 @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado)
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdParentezco)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdAbonador">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdAbonador">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdAbonador">Borrar</a>
+                <a asp-action="Edit" asp-route-id="@item.IdAbonador" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdAbonador" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdAbonador" class="btn btn-danger">Borrar</a>
             </td>
         </tr>
 }
