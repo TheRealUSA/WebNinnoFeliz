@@ -23,10 +23,12 @@ namespace WebNinnoFeliz.Models
         [Required]
         [Column("nombrePlato")]
         [StringLength(20)]
+        [Display(Name = "Nombre plato")]
         public string NombrePlato { get; set; }
         [Required]
         [Column("precioPlato")]
         [StringLength(10)]
+        [Display(Name = "Precio plato")]
         public string PrecioPlato { get; set; }
 
         [InverseProperty(nameof(MenuPlato.IdPlatoNavigation))]

@@ -22,7 +22,11 @@ namespace WebNinnoFeliz.Models
         [Required]
         [Column("nombreIngrediente")]
         [StringLength(20)]
+
+        [Display( Name = "Nombre ingrediente")]
         public string NombreIngrediente { get; set; }
+      
+
 
         [InverseProperty(nameof(NinnoAlergiaIngrediente.IdIngredienteNavigation))]
         public virtual ICollection<NinnoAlergiaIngrediente> NinnoAlergiaIngredientes { get; set; }

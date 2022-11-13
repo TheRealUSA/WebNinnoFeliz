@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.Ingrediente>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tabla de Ingrediente</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Id ingrediente
+            </th>
+            <th>
+                Nombre ingrediente
+            </th>
+          
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdIngrediente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreIngrediente)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdIngrediente" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdIngrediente" class="btn btn-info">Detalle</a> | 
+                <a asp-action="Delete" asp-route-id="@item.IdIngrediente" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
