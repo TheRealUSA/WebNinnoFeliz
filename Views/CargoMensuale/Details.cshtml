@@ -11,17 +11,23 @@
     <h4>CargoMensual</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CargoMensual)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CargoMensual)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdUsoComedorNavigation)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdUsoComedorNavigation.IdUsoComedor)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdUsoComedorNavigation.IdUsoComedor)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdUsoComedorNavigation.IdNinno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdUsoComedorNavigation.IdNinno)
         </dd>
     </dl>
 </div>

@@ -22,16 +22,22 @@ namespace WebNinnoFeliz.Controllers
         }
 
         // GET: Parentezco
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string buscar)
         {
-            return View(await _context.Parentezcos.ToListAsync());
+            var parentezcos = from parentezco in _context.Parentezcos select parentezco;
+
+            if(!String.IsNullOrEmpty(buscar))
+            {
+                parentezcos = parentezcos.Where(s => s.DetallePar!.Contains(buscar));
+            }
+             
+            return View(await parentezcos.ToListAsync());
         }
 
         //PDF
 
         public async Task<IActionResult> PDF()
         {
-            //return View(await _context.Parentezcos.ToListAsync());
             return new ViewAsPdf(await _context.Parentezcos.ToListAsync())
             {
                 FileName = "Parentezco.pdf"

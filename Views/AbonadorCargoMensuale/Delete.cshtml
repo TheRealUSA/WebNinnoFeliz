@@ -12,18 +12,30 @@
     <h4>AbonadorCargoMensual</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdAbonadorNavigation)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdAbonadorNavigation.IdEncargado)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IdAbonadorNavigation.IdAbonador)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdAbonadorNavigation.IdEncargado)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IdCargoNavigation)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdAbonadorNavigation.NumeroCuenta)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdAbonadorNavigation.NumeroCuenta)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdCargoNavigation.IdCargo)
+        </dt>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdCargoNavigation.IdCargo)
-        </dd class>
+        </dd>
+    @*  <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdCargoNavigation.IdUsoComedorNavigation.IdNinno) 
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdCargoNavigation.IdUsoComedorNavigation.IdNinno) 
+        </dd class> *@
     </dl>
     
     <form asp-action="Delete">

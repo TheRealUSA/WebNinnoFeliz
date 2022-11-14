@@ -8,7 +8,8 @@
 <h1>Tabla de Uso del Comedor</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Nuevo</a> 
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    <a asp-action="PDF" class="btn btn-primary">PDF</a>
 </p>
 <table class="table">
     <thead class="table-dark">
@@ -20,10 +21,16 @@
                 Cantidad de Días
             </th>
             <th>
-                Id Mes
+                Mes
             </th>
             <th>
-                Id Niño
+                NombreNiño
+            </th>
+            <th>
+                Apell1Ninno
+            </th>
+            <th>
+                Apell2Ninno
             </th>
             <th>Acciones</th>
         </tr>
@@ -41,12 +48,18 @@
                 @Html.DisplayFor(modelItem => item.IdMesNavigation.NombreMes)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdUsoComedor">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdUsoComedor">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdUsoComedor">Borrar</a>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno) 
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdUsoComedor" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdUsoComedor" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdUsoComedor" class="btn btn-danger">Borrar</a>
             </td>
         </tr>
 }
