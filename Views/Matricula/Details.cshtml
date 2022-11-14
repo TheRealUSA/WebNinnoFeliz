@@ -11,17 +11,35 @@
     <h4>Matricula</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaIngreso)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FechaIngreso)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdNinnoNavigation)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdNinnoNavigation.IdentificacionNinno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNinnoNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdNinnoNavigation.NombreNinno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNinnoNavigation)
+        </dt>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdNinnoNavigation.Apell1Ninno)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdNinnoNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdNinnoNavigation.Apell2Ninno)
         </dd>
     </dl>
 </div>

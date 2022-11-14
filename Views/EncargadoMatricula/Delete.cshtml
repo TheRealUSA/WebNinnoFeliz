@@ -12,18 +12,55 @@
     <h4>EncargadoMatricula</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdEncargadoNavigation)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdEncargadoNavigation.IdentificacionEncargado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdEncargadoNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdEncargadoNavigation.NombreEncargado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdEncargadoNavigation)
+        </dt>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdEncargadoNavigation.Apell1Encargado)
-        </dd class>
-        <dt class = "col-sm-2">
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdEncargadoNavigation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdEncargadoNavigation.Apell2Encargado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IdEncargadoNavigation.IdParentezco)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IdEncargadoNavigation.IdParentezco)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroMatriculaNavigation.FechaIngreso)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumeroMatriculaNavigation.FechaIngreso)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroMatriculaNavigation.IdNinno)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumeroMatriculaNavigation.IdNinno)
+        </dd>
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NumeroMatriculaNavigation)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NumeroMatriculaNavigation.NumeroMatricula)
-        </dd class>
+        </dd>
     </dl>
     
     <form asp-action="Delete">
