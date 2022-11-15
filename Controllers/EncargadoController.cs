@@ -9,12 +9,13 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
 
 namespace WebNinnoFeliz.Controllers
 {
     public class EncargadoController : Controller
     {
-        List<Encargado> listaencargado = new List<Encargado>();
+        List<EncargadoParentezco> listaencargado = new List<EncargadoParentezco>();
         SqlDataAdapter adapter;
 
         private readonly WebNinnoFelizContext _context;
@@ -24,7 +25,7 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        public List<Encargado> ListaEncargado()
+        public List<EncargadoParentezco> ListaEncargado()
         {
             DataTable datatable = new DataTable();
             string error;
@@ -42,7 +43,7 @@ namespace WebNinnoFeliz.Controllers
                     {
                         for (int i = 0; i < tamanno; i++)
                         {
-                            Encargado encargado = new Encargado();
+                            EncargadoParentezco encargado = new EncargadoParentezco();
                             encargado.IdEncargado = Int32.Parse(datatable.Rows[i][0].ToString());
                             encargado.IdentificacionEncargado = datatable.Rows[i][1].ToString();
                             encargado.NombreEncargado = datatable.Rows[i][2].ToString();
@@ -50,7 +51,7 @@ namespace WebNinnoFeliz.Controllers
                             encargado.Apell2Encargado = datatable.Rows[i][4].ToString();
                             encargado.TelefonoEncargado = datatable.Rows[i][5].ToString();
                             encargado.DirecciónEncargado = datatable.Rows[i][6].ToString();
-                            //encargado.IdParentezco = Int32.Parse(datatable.Rows[i][7].ToString());
+                            encargado.DetallePar = datatable.Rows[i][7].ToString();
                             listaencargado.Add(encargado);
                         }
                     }

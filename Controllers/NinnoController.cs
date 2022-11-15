@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Rotativa.AspNetCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
 
 namespace WebNinnoFeliz.Controllers
 {
@@ -17,7 +18,7 @@ namespace WebNinnoFeliz.Controllers
     {
 
 
-        List<Ninno> listaninno = new List<Ninno>();
+        List<NinnoGenero> listaninno = new List<NinnoGenero>();
         SqlDataAdapter adapter;
 
         private readonly WebNinnoFelizContext _context;
@@ -27,7 +28,7 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        public List<Ninno> ListarNinno()
+        public List<NinnoGenero> ListarNinno()
         {
             DataTable datatable = new DataTable();
             string error;
@@ -45,7 +46,7 @@ namespace WebNinnoFeliz.Controllers
                     {
                         for (int i = 0; i < tamanno; i++)
                         {
-                            Ninno ninno = new Ninno();
+                            NinnoGenero ninno = new NinnoGenero();
                             ninno.IdNinno = Int32.Parse(datatable.Rows[i][0].ToString());
                             ninno.IdentificacionNinno = datatable.Rows[i][1].ToString();
                             ninno.NombreNinno = datatable.Rows[i][2].ToString();
@@ -53,7 +54,7 @@ namespace WebNinnoFeliz.Controllers
                             ninno.Apell2Ninno = datatable.Rows[i][4].ToString();
                             ninno.FechaNacimiento = DateTime.Parse(datatable.Rows[i][5].ToString());
                             ninno.DireccionNinno = datatable.Rows[i][6].ToString();
-                            //ninno.IdGenero = Int32.Parse(datatable.Rows[i][7].ToString());
+                            ninno.DetalleGen = datatable.Rows[i][7].ToString();
                             listaninno.Add(ninno);
                         }
                     }
@@ -77,11 +78,11 @@ namespace WebNinnoFeliz.Controllers
         }
 
         // GET: Ninno
-        ////public async Task<IActionResult> Index()
-        ////{
-        ////    var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
-        ////    return View(await webNinnoFelizContext.ToListAsync());
-        ////}
+        //public async Task<IActionResult> Index()
+        //{
+        //    var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+        //    return View(await webNinnoFelizContext.ToListAsync());
+        //}
 
 
         public async Task<IActionResult> PDF()

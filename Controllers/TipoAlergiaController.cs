@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,16 +9,64 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
 
 namespace WebNinnoFeliz.Controllers
 {
     public class TipoAlergiaController : Controller
     {
+        List<NinnosAlergicos> listaninnosalergicos = new List<NinnosAlergicos>();
+        SqlDataAdapter adapter;
+
         private readonly WebNinnoFelizContext _context;
 
         public TipoAlergiaController(WebNinnoFelizContext context)
         {
             _context = context;
+        }
+
+        // Consulta
+
+        public List<NinnosAlergicos> ListarNinnosAlergicos()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_NinnosAlergicos", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            NinnosAlergicos NiAl = new NinnosAlergicos();
+                            NiAl.nombreTipoAlergia = datatable.Rows[i][0].ToString();
+                            NiAl.CantidadNinnos = Int32.Parse(datatable.Rows[i][1].ToString());
+                            listaninnosalergicos.Add(NiAl);
+                        }
+                        
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaninnosalergicos;
+        }
+
+        public IActionResult ConsNinnosAlergicos()
+        {
+            return View(ListarNinnosAlergicos());
         }
 
         // GET: TipoAlergia

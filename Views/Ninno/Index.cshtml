@@ -1,4 +1,5 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.Ninno>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.NinnoGenero>
+@*@model IEnumerable<WebNinnoFeliz.Models.Ninno>*@
 
 @{
     ViewData["Title"] = "Index";
@@ -78,8 +79,8 @@
                     @Html.DisplayFor(modelItem => item.DireccionNinno)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdGeneroNavigation.DetalleGen)
-                    @*@Html.DisplayFor(modelItem => item.IdGenero)*@
+                    @*@Html.DisplayFor(modelItem => item.IdGeneroNavigation.DetalleGen)*@
+                    @Html.DisplayFor(modelItem => item.DetalleGen)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.IdNinno" class="btn btn-success">Editar</a> |
