@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,10 @@ namespace WebNinnoFeliz.Controllers
 {
     public class ParentezcoController : Controller
     {
+
+        List<Parentezco> listaparentezco = new List<Parentezco>();
+        SqlDataAdapter adapter;
+
         private readonly WebNinnoFelizContext _context;
 
         public ParentezcoController(WebNinnoFelizContext context)
@@ -22,16 +27,47 @@ namespace WebNinnoFeliz.Controllers
         }
 
         // GET: Parentezco
-        public async Task<IActionResult> Index(string buscar)
-        {
-            var parentezcos = from parentezco in _context.Parentezcos select parentezco;
 
-            if(!String.IsNullOrEmpty(buscar))
+        public List<Parentezco> ListarParentezco()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
             {
-                parentezcos = parentezcos.Where(s => s.DetallePar!.Contains(buscar));
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarParentezco", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            Parentezco parentezco = new Parentezco();
+                            parentezco.IdParentezco = Int32.Parse(datatable.Rows[i][0].ToString());
+                            parentezco.DetallePar = datatable.Rows[i][1].ToString();
+                            listaparentezco.Add(parentezco);
+                        }
+                    }
+                    conn.Close();
+                }
+
             }
-             
-            return View(await parentezcos.ToListAsync());
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaparentezco;
+        }
+
+
+        public IActionResult Index()
+        {
+            return View(ListarParentezco());
         }
 
         //PDF

@@ -1,0 +1,59 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.NinnoAlergiaIngrediente>
+@{
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_Sty.cshtml";
+}
+
+<h1>Tabla de niño alergia ingrediente</h1>
+
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Id niño alergia ingrediente
+            </th>
+            <th>
+                Alergia
+            </th>
+            <th>
+                Ingrediente
+            </th>
+            <th>
+                Nombre niño
+            </th>
+            <th>
+                Apellido1
+            </th>
+            <th>
+                Apellido2
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNinnoAlergiaIngrediente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdAlergiaNavigation.NombreAlergia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdIngredienteNavigation.NombreIngrediente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
 
@@ -13,6 +15,11 @@ namespace WebNinnoFeliz.Controllers
 {
     public class NinnoController : Controller
     {
+
+
+        List<Ninno> listaninno = new List<Ninno>();
+        SqlDataAdapter adapter;
+
         private readonly WebNinnoFelizContext _context;
 
         public NinnoController(WebNinnoFelizContext context)
@@ -20,11 +27,69 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        // GET: Ninno
-        public async Task<IActionResult> Index()
+        public List<Ninno> ListarNinno()
         {
-            var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarNinnos", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            Ninno ninno = new Ninno();
+                            ninno.IdNinno = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.IdentificacionNinno = datatable.Rows[i][1].ToString();
+                            ninno.NombreNinno = datatable.Rows[i][2].ToString();
+                            ninno.Apell1Ninno = datatable.Rows[i][3].ToString();
+                            ninno.Apell2Ninno = datatable.Rows[i][4].ToString();
+                            ninno.FechaNacimiento = DateTime.Parse(datatable.Rows[i][5].ToString());
+                            ninno.DireccionNinno = datatable.Rows[i][6].ToString();
+                            //ninno.IdGenero = Int32.Parse(datatable.Rows[i][7].ToString());
+                            listaninno.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaninno;
+        }
+
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarNinno());
+        }
+
+        // GET: Ninno
+        ////public async Task<IActionResult> Index()
+        ////{
+        ////    var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+        ////    return View(await webNinnoFelizContext.ToListAsync());
+        ////}
+
+
+        public async Task<IActionResult> PDF()
+        {
+            return new ViewAsPdf(await _context.Ninnos.Include(n => n.IdGeneroNavigation).ToListAsync())
+            {
+                FileName = "Niño.pdf"
+            };
         }
 
         // GET: Ninno/Details/5

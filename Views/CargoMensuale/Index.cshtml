@@ -5,13 +5,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Styles
+{
+    <link href="~/lib/datatables.net-bs4/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+
 <h1>Tabla de Cargo Mensual</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
     <a asp-action="PDF" class="btn btn-primary">PDF</a>
 </p>
-<table class="table">
+<table id="Tabla" class="table">
     <thead class="table-dark">
         <tr>
             <th>
@@ -30,26 +35,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCargo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CargoMensual)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsoComedorNavigation.IdUsoComedor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsoComedorNavigation.IdNinno) 
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCargo" class="btn btn-success">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCargo" class="btn btn-info">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCargo" class="btn btn-danger">Borrar</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CargoMensual)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUsoComedorNavigation.IdUsoComedor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUsoComedorNavigation.IdNinno)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdCargo" class="btn btn-success">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdCargo" class="btn btn-info">Detalle</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdCargo" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+@section Scripts
+{
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Tabla').DataTable();
+        });
+    </script>
+}

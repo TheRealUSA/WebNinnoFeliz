@@ -44,6 +44,8 @@ namespace WebNinnoFeliz.Data
         public virtual DbSet<TipoAlergia> TipoAlergias { get; set; }
         public virtual DbSet<UsoComedore> UsoComedores { get; set; }
 
+        public virtual DbSet<Usuario> Usuarios { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

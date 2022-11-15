@@ -5,22 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*@section Styles
+{
+    <link href="~/lib/datatables.net-bs4/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}*@
+
 <h1>Tabla de parentezcos</h1>
-
-<form asp-controller="Parentezco" asp-action="Index">
-    <p>
-        Busacar por Detalle: <input type="text" name="buscar" class="form-text" />
-        <br />
-        <input type="submit" value="Buscar" class="btn btn-sm btn-dark"/>
-    </p>
-
-</form>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
     <a asp-action="PDF" class="btn btn-primary">PDF</a>
+
 </p>
-<table class="table">
+<table id="Tabla" class="table">
     <thead class="table-dark">
         <tr>
             <th>
@@ -52,3 +49,13 @@
         }
     </tbody>
 </table>
+@*@section Scripts
+{
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Tabla').DataTable();
+        });
+    </script>
+}*@

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,9 @@ namespace WebNinnoFeliz.Controllers
 {
     public class EncargadoController : Controller
     {
+        List<Encargado> listaencargado = new List<Encargado>();
+        SqlDataAdapter adapter;
+
         private readonly WebNinnoFelizContext _context;
 
         public EncargadoController(WebNinnoFelizContext context)
@@ -20,12 +24,62 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        // GET: Encargado
-        public async Task<IActionResult> Index()
+        public List<Encargado> ListaEncargado()
         {
-            var webNinnoFelizContext = _context.Encargados.Include(e => e.IdParentezcoNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarEncargados", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            Encargado encargado = new Encargado();
+                            encargado.IdEncargado = Int32.Parse(datatable.Rows[i][0].ToString());
+                            encargado.IdentificacionEncargado = datatable.Rows[i][1].ToString();
+                            encargado.NombreEncargado = datatable.Rows[i][2].ToString();
+                            encargado.Apell1Encargado = datatable.Rows[i][3].ToString();
+                            encargado.Apell2Encargado = datatable.Rows[i][4].ToString();
+                            encargado.TelefonoEncargado = datatable.Rows[i][5].ToString();
+                            encargado.DirecciónEncargado = datatable.Rows[i][6].ToString();
+                            //encargado.IdParentezco = Int32.Parse(datatable.Rows[i][7].ToString());
+                            listaencargado.Add(encargado);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaencargado;
         }
+
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Encargados.Include(e => e.IdParentezcoNavigation);
+            return View(ListaEncargado());
+        }
+
+
+        // GET: Encargado
+        //public async Task<IActionResult> Index()
+        //{
+        //    var webNinnoFelizContext = _context.Encargados.Include(e => e.IdParentezcoNavigation);
+        //    return View(await webNinnoFelizContext.ToListAsync());
+        //}
 
         // GET: Encargado/Details/5
         public async Task<IActionResult> Details(int? id)

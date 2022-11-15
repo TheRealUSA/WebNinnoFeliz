@@ -5,12 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Styles
+{
+    <link href="~/lib/datatables.net-bs4/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+
 <h1>Tabla de Encargado de baja</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
 </p>
-<table class="table">
+<table id="Tabla" class="table">
     <thead class="table-dark">
         <tr>
             <th>
@@ -83,3 +88,14 @@
         }
     </tbody>
 </table>
+
+@section Scripts
+{
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Tabla').DataTable();
+        });
+    </script>
+}

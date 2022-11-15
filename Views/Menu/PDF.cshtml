@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.Menu>
+@{
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_Sty.cshtml";
+}
+
+<h1>Tabla de menú</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Id numero menú
+            </th>
+            <th>
+                Nombre menú
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNumeroMenu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreMenu)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,22 +1,13 @@
 ﻿@model IEnumerable<WebNinnoFeliz.Models.Abonadore>
-
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@section Styles
-{
-    <link href="~/lib/datatables.net-bs4/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_Sty.cshtml";
 }
 
 <h1>Tabla de Abonadores</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
-    <a asp-action="PDF" class="btn btn-primary">PDF</a>
-</p>
-<table id="Tabla" class="table">
+
+<table class="table">
     <thead class="table-dark">
         <tr>
             <th>
@@ -37,7 +28,6 @@
             <th>
                 Id Encargado
             </th>
-            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -62,23 +52,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdParentezco)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdAbonador" class="btn btn-success">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdAbonador" class="btn btn-info">Detalle</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdAbonador" class="btn btn-danger">Borrar</a>
-                </td>
             </tr>
         }
     </tbody>
 </table>
-
-@section Scripts
-{
-    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
-    <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#Tabla').DataTable();
-        });
-    </script>
-}

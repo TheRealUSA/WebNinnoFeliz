@@ -5,12 +5,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Styles
+{
+    <link href="~/lib/datatables.net-bs4/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+
 <h1>Tabla de registro baja</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
 </p>
-<table class="table">
+<table id="Tabla" class="table">
     <thead class="table-dark">
         <tr>
             <th>
@@ -20,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.FechaBaja)
             </th>
             <th>
-            Identificacion Niño
+                Identificacion Niño
             </th>
             <th>
                 Nombre niño
@@ -35,32 +40,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdRegistroBaja)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaBaja)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.IdentificacionNinno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdRegistroBaja" class="btn btn-success">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdRegistroBaja" class="btn btn-info">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdRegistroBaja" class="btn btn-danger">Borrar</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdRegistroBaja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaBaja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.IdentificacionNinno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdRegistroBaja" class="btn btn-success">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdRegistroBaja" class="btn btn-info">Detalle</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdRegistroBaja" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts
+{
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Tabla').DataTable();
+        });
+    </script>
+}

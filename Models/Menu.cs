@@ -22,8 +22,6 @@ namespace WebNinnoFeliz.Models
         [Required]
         [Column("nombreMenu")]
         [StringLength(20)]
-
-        [Display(Name = "Nombre menú")]
         public string NombreMenu { get; set; }
 
         [InverseProperty(nameof(MenuPlato.IdNumeroMenuNavigation))]

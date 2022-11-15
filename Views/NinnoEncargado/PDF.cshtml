@@ -1,22 +1,12 @@
 ﻿@model IEnumerable<WebNinnoFeliz.Models.NinnoEncargado>
-
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_Sty.cshtml";
 }
 
-@section Styles
-{
-    <link href="~/lib/datatables.net-bs4/dataTables.bootstrap4.min.css" rel="stylesheet" />
-}
+<h1>PDF de niños y su encargados</h1>
 
-<h1>Tabla de niños y su encargados</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
-    <a asp-action="PDF" class="btn btn-primary">PDF</a>
-</p>
-<table id="Tabla" class="table">
+<table class="table">
     <thead class="table-dark">
         <tr>
             <th>
@@ -54,7 +44,6 @@
                 Apellido2 niño
                 @*@Html.DisplayNameFor(model => model.IdNinnoNavigation)*@
             </th>
-            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -89,23 +78,7 @@
                     @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
                 </td>
 
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdNinnoEncargado" class="btn btn-success">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdNinnoEncargado" class="btn btn-info">Detalle</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdNinnoEncargado" class="btn btn-danger">Borrar</a>
-                </td>
             </tr>
         }
     </tbody>
 </table>
-
-@section Scripts
-{
-    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
-    <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#Tabla').DataTable();
-        });
-    </script>
-}
