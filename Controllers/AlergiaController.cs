@@ -7,24 +7,67 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
+using System.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
 
 namespace WebNinnoFeliz.Controllers
 {
     public class AlergiaController : Controller
     {
+        List<ListarAlergias> listaalergia = new List<ListarAlergias>();
+        SqlDataAdapter adapter;
         private readonly WebNinnoFelizContext _context;
 
         public AlergiaController(WebNinnoFelizContext context)
         {
             _context = context;
         }
+        //Listar
+        public List<ListarAlergias> ListarAlergias()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarAlergias", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            ListarAlergias ninno = new ListarAlergias();
+                            ninno.IdAlergia = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.NombreAlergia = datatable.Rows[i][1].ToString();
+                            ninno.NombreTipoAlergia = datatable.Rows[i][2].ToString();
+
+                            listaalergia.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaalergia;
+        }
 
         // GET: Alergia
-        public async Task<IActionResult> Index()
+
+        public IActionResult Index()
         {
-            var webNinnoFelizContext = _context.Alergias.Include(a => a.IdTipoAlergiaNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarAlergias());
         }
 
         // GET: Alergia/Details/5

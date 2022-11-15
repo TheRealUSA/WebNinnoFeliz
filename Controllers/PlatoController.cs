@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,23 +9,115 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
+
 
 namespace WebNinnoFeliz.Controllers
 {
     public class PlatoController : Controller
     {
+        List<Plato> listaPlato = new List<Plato>();
+        List<CostePlatos> listaCoste = new List<CostePlatos>();
+        SqlDataAdapter adapter;
+
         private readonly WebNinnoFelizContext _context;
 
         public PlatoController(WebNinnoFelizContext context)
         {
             _context = context;
         }
-
-        // GET: Plato
-        public async Task<IActionResult> Index()
+        //Listar
+        public List<Plato> ListarPlato()
         {
-            return View(await _context.Platos.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarPlatos", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            Plato ninno = new Plato();
+                            ninno.IdPlato = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.NombrePlato = datatable.Rows[i][1].ToString();
+                            ninno.PrecioPlato = datatable.Rows[i][2].ToString();
+                            listaPlato.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaPlato;
         }
+
+        // GET: TipoAlergia
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarPlato());
+        }
+
+        // Consulta
+
+        public List<CostePlatos> ListarCostosPlatos()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_CostePlatos", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            CostePlatos NiAl = new CostePlatos();
+                            NiAl.precioPlato = datatable.Rows[i][0].ToString();
+                            NiAl.CantPlatos = Int32.Parse(datatable.Rows[i][1].ToString());
+                            listaCoste.Add(NiAl);
+                        }
+
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaCoste;
+        }
+
+        public IActionResult ConsCostePlatos()
+        {
+            return View(ListarCostosPlatos());
+        }
+
+
+     
 
         // GET: Plato/Details/5
         public async Task<IActionResult> Details(int? id)

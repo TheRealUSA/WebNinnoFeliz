@@ -7,17 +7,65 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
+using System.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
 
 namespace WebNinnoFeliz.Controllers
 {
     public class GeneroController : Controller
     {
         private readonly WebNinnoFelizContext _context;
-
+        List<Historico> listaHistorico = new List<Historico>();
+        SqlDataAdapter adapter;
         public GeneroController(WebNinnoFelizContext context)
         {
             _context = context;
+        }
+
+        // Consulta
+
+        public List<Historico> ListarHistorico()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_HISTORICO", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            Historico NiAl = new Historico();
+                            NiAl.id = Int32.Parse(datatable.Rows[i][0].ToString());
+                            NiAl.Fecha = datatable.Rows[i][1].ToString();
+                            NiAl.descripcion = datatable.Rows[i][2].ToString();
+                            listaHistorico.Add(NiAl);
+                        }
+
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaHistorico;
+        }
+
+        public IActionResult ConsHistorico()
+        {
+            return View(ListarHistorico());
         }
 
         //GET: Genero

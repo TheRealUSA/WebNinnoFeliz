@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.Alergia>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.ListarAlergias>
 
 @{
     ViewData["Title"] = "Index";
@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.NombreAlergia)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdTipoAlergiaNavigation.NombreTipoAlergia)
+                @Html.DisplayFor(modelItem => item.NombreTipoAlergia)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdAlergia"class="btn btn-success">Editar</a> |

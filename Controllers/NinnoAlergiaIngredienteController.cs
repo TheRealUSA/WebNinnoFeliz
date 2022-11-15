@@ -9,23 +9,69 @@ using Microsoft.EntityFrameworkCore;
 using Rotativa.AspNetCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
-
+using WebNinnoFeliz.Models.ViewModels;
+using System.Data;
 namespace WebNinnoFeliz.Controllers
 {
     public class NinnoAlergiaIngredienteController : Controller
     {
+
+        List<ListarNinno_Alergia_Ingredientes> listaalergiaIn = new List<ListarNinno_Alergia_Ingredientes>();
+        SqlDataAdapter adapter;
         private readonly WebNinnoFelizContext _context;
 
         public NinnoAlergiaIngredienteController(WebNinnoFelizContext context)
         {
             _context = context;
         }
-
-        // GET: NinnoAlergiaIngrediente
-        public async Task<IActionResult> Index()
+        //Listar
+        public List<ListarNinno_Alergia_Ingredientes> ListarAlergiasIn()
         {
-            var webNinnoFelizContext = _context.NinnoAlergiaIngredientes.Include(n => n.IdAlergiaNavigation).Include(n => n.IdIngredienteNavigation).Include(n => n.IdNinnoNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarNinno_Alergia_Ingredientes", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            ListarNinno_Alergia_Ingredientes ninno = new ListarNinno_Alergia_Ingredientes();
+                            ninno.idNinnoAlergiaIngrediente = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.nombreAlergia = datatable.Rows[i][1].ToString();
+                            ninno.NombreIngrediente = datatable.Rows[i][2].ToString();
+                            ninno.IdentificacionNinno = datatable.Rows[i][3].ToString();
+                            ninno.NombreNinno = datatable.Rows[i][4].ToString();
+                            ninno.Apell1Ninno = datatable.Rows[i][5].ToString();
+                            ninno.Apell2Ninno = datatable.Rows[i][6].ToString();
+                            listaalergiaIn.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaalergiaIn;
+        }
+
+        // GET: Alergia
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarAlergiasIn());
         }
 
         public async Task<IActionResult> PDF()

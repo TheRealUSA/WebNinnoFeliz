@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.CostePlatos>
+@{
+    ViewData["Title"] = "ConsCostePlatos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+                      <h1>Consulta Cantidad de platos con coste más alto</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Costo de platos
+            </th>
+            <th>
+                Cantidad de platos
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precioPlato)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CantPlatos)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

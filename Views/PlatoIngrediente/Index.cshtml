@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.PlatoIngrediente>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.ListarPlato_Ingredientes>
 
 @{
     ViewData["Title"] = "Index";
@@ -33,10 +33,10 @@
                 @Html.DisplayFor(modelItem => item.IdPlatoIngrediente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdIngredienteNavigation.NombreIngrediente)
+                @Html.DisplayFor(modelItem => item.NombreIngrediente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPlatoNavigation.NombrePlato)
+                @Html.DisplayFor(modelItem => item.NombrePlato)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdPlatoIngrediente"class="btn btn-success">Editar</a> |
