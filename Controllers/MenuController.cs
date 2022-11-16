@@ -9,22 +9,64 @@ using Microsoft.EntityFrameworkCore;
 using Rotativa.AspNetCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
+using System.Data;
 
 namespace WebNinnoFeliz.Controllers
 {
     public class MenuController : Controller
     {
+        List<Menu> listaMenu = new List<Menu>();
+        SqlDataAdapter adapter;
         private readonly WebNinnoFelizContext _context;
 
         public MenuController(WebNinnoFelizContext context)
         {
             _context = context;
         }
-
-        // GET: Menu
-        public async Task<IActionResult> Index()
+        //Listar
+        public List<Menu> ListarMenu()
         {
-            return View(await _context.Menus.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarMenus", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            Menu ninno = new Menu();
+                            ninno.IdNumeroMenu = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.NombreMenu = datatable.Rows[i][1].ToString();
+                            listaMenu.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaMenu;
+        }
+
+        // GET: TipoAlergia
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarMenu());
         }
 
         public async Task<IActionResult> PDF()

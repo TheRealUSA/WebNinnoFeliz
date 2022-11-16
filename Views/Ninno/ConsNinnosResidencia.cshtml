@@ -1,0 +1,35 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.NinnosResidencia>
+@{
+    ViewData["Title"] = "ConsNinnosResidencia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Consulta Cantidad de niños y residencia </h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+               Residencia
+            </th>
+            <th>
+                Cantidad de ñiños
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.direccionNinno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ninnos)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

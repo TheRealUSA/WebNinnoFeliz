@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.NaiPlato>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.ListarNAI_Platos>
 
 @{
     ViewData["Title"] = "Index";
@@ -17,13 +17,32 @@
                 ID NaiPlato
             </th>
             <th>
-                Id niño
+                IdentificacionNiño
+
             </th>
             <th>
-                Niño alergia ingredientes
+                NombreNiño
+
+            </th>
+            <th>
+                Apell1Niño
+
+            </th>
+            <th>
+                Apell2Niño
+
+            </th>
+            <th>
+                Alergia
+
+            </th>
+            <th>
+                Ingrediente alergia
+
             </th>
             <th>
                 Plato
+
             </th>
             <th>Acciones</th>
         </tr>
@@ -35,16 +54,28 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IdNaiplato)
             </td>
-
             <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoAlergiaIngredienteNavigation.IdNinno)
+                @Html.DisplayFor(modelItem => item.IdentificacionNinno)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoAlergiaIngredienteNavigation.IdNinnoAlergiaIngrediente)
+                @Html.DisplayFor(modelItem => item.NombreNinno)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdPlatoNavigation.NombrePlato)
+                @Html.DisplayFor(modelItem => item.Apell1Ninno)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell2Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreAlergia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreIngrediente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombrePlato)
+            </td>
+     
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdNaiplato" class="btn btn-success">Editar</a> |
                 <a asp-action="Details" asp-route-id="@item.IdNaiplato" class="btn btn-info">Detalle</a> |

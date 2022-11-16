@@ -9,10 +9,14 @@ using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
 
+using System.Data;
+
 namespace WebNinnoFeliz.Controllers
 {
     public class IngredienteController : Controller
     {
+        List<Ingrediente> listaIngrediente = new List<Ingrediente>();
+        SqlDataAdapter adapter;
         private readonly WebNinnoFelizContext _context;
 
         public IngredienteController(WebNinnoFelizContext context)
@@ -20,11 +24,51 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        // GET: Ingrediente
-        public async Task<IActionResult> Index()
+        //Listar
+        public List<Ingrediente> ListarIngrediente()
         {
-            return View(await _context.Ingredientes.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarIngredientes", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            Ingrediente ninno = new Ingrediente();
+                            ninno.IdIngrediente = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.NombreIngrediente = datatable.Rows[i][1].ToString();
+                            listaIngrediente.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaIngrediente;
         }
+
+        // GET: TipoAlergia
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarIngrediente());
+        }
+
 
         // GET: Ingrediente/Details/5
         public async Task<IActionResult> Details(int? id)

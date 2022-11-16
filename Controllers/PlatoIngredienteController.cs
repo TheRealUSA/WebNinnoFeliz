@@ -8,11 +8,14 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
-
+using WebNinnoFeliz.Models.ViewModels;
+using System.Data;
 namespace WebNinnoFeliz.Controllers
 {
     public class PlatoIngredienteController : Controller
     {
+        List<ListarPlato_Ingredientes> listaPlatoIn = new List<ListarPlato_Ingredientes>();
+        SqlDataAdapter adapter;
         private readonly WebNinnoFelizContext _context;
 
         public PlatoIngredienteController(WebNinnoFelizContext context)
@@ -20,12 +23,53 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        // GET: PlatoIngrediente
-        public async Task<IActionResult> Index()
+        //Listar
+        public List<ListarPlato_Ingredientes> ListarPlatoIngredientes()
         {
-            var webNinnoFelizContext = _context.PlatoIngredientes.Include(p => p.IdIngredienteNavigation).Include(p => p.IdPlatoNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarPlato_Ingredientes", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            ListarPlato_Ingredientes ninno = new ListarPlato_Ingredientes();
+                            ninno.IdPlatoIngrediente = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.NombrePlato = datatable.Rows[i][1].ToString();
+                            ninno.NombreIngrediente = datatable.Rows[i][2].ToString();
+   
+                            listaPlatoIn.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaPlatoIn;
         }
+
+        // GET: Alergia
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarPlatoIngredientes());
+        }
+
 
         // GET: PlatoIngrediente/Details/5
         public async Task<IActionResult> Details(int? id)

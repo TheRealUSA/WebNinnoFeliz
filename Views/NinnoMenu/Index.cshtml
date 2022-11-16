@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.NinnoMenu>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.ListarNinno_Menus>
 
 @{
     ViewData["Title"] = "Index";
@@ -23,6 +23,9 @@
                 Nombre niño
             </th>
             <th>
+                Identificacion
+            </th>
+            <th>
                 Apellido1
             </th>
             <th>
@@ -39,27 +42,30 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoMenu)
+                @Html.DisplayFor(modelItem => item.idNinnoMenu)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaConsumido)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
+                @Html.DisplayFor(modelItem => item.IdentificacionNinno)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
+                @Html.DisplayFor(modelItem => item.NombreNinno)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
+                @Html.DisplayFor(modelItem => item.Apell1Ninno)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdNumeroMenuNavigation.NombreMenu)
+                @Html.DisplayFor(modelItem => item.Apell2Ninno)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdNinnoMenu" class="btn btn-success">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdNinnoMenu" class="btn btn-info">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdNinnoMenu" class="btn btn-danger">Borrar</a>
+                @Html.DisplayFor(modelItem => item.NombreMenu)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.idNinnoMenu" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.idNinnoMenu" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.idNinnoMenu" class="btn btn-danger">Borrar</a>
             </td>
         </tr>
         }

@@ -8,23 +8,64 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
-
+using WebNinnoFeliz.Models.ViewModels;
+using System.Data;
 namespace WebNinnoFeliz.Controllers
 {
     public class MenuPlatoController : Controller
     {
+        List<ListarMenu_Platos> listaMenu_Platos = new List<ListarMenu_Platos>();
+        SqlDataAdapter adapter;
         private readonly WebNinnoFelizContext _context;
 
         public MenuPlatoController(WebNinnoFelizContext context)
         {
             _context = context;
         }
-
-        // GET: MenuPlato
-        public async Task<IActionResult> Index()
+        //Listar
+        public List<ListarMenu_Platos> ListarMenuPlatos()
         {
-            var webNinnoFelizContext = _context.MenuPlatos.Include(m => m.IdNumeroMenuNavigation).Include(m => m.IdPlatoNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarMenu_Platos", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            ListarMenu_Platos ninno = new ListarMenu_Platos();
+                            ninno.IdnumeroMenuPlato = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.NombrePlato = datatable.Rows[i][1].ToString();
+                            ninno.NombreMenu = datatable.Rows[i][2].ToString();
+                            listaMenu_Platos.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaMenu_Platos;
+        }
+
+        // GET: Alergia
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarMenuPlatos());
         }
 
         // GET: MenuPlato/Details/5

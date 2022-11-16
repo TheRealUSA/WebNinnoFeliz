@@ -16,8 +16,12 @@ namespace WebNinnoFeliz.Controllers
 {
     public class NinnoController : Controller
     {
-
-
+        
+        List<NinnosPlatoAlergicos> listaPlatosA = new List<NinnosPlatoAlergicos>();
+        List<NinnosResidencia> listaNinnos = new List<NinnosResidencia>();
+        List<NinnasResidencia> listaNinnas = new List<NinnasResidencia>();
+        List<NinnosMatriculados> listaNinnosMat = new List<NinnosMatriculados>();
+        List<NinnosDadosBaja> listaNinnosBaj = new List<NinnosDadosBaja>();
         List<NinnoGenero> listaninno = new List<NinnoGenero>();
         SqlDataAdapter adapter;
 
@@ -28,6 +32,230 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
+
+
+        // Consulta
+
+        public List<NinnosDadosBaja> ListarNinnosDadosBaja()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_CantNinnosDadosBaja", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            NinnosDadosBaja NiAl = new NinnosDadosBaja();
+                            NiAl.AnnoDadoBaja = datatable.Rows[i][0].ToString();
+                            NiAl.CantidadNinnos = Int32.Parse(datatable.Rows[i][1].ToString());
+                            listaNinnosBaj.Add(NiAl);
+                        }
+
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaNinnosBaj;
+        }
+
+        public IActionResult ConsNinnosDadosBaja()
+        {
+            return View(ListarNinnosDadosBaja());
+        }
+        // Consulta
+
+        public List<NinnosMatriculados> ListarNinnosMatriculados()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_CantNinnosMatriculados", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            NinnosMatriculados NiAl = new NinnosMatriculados();
+                            NiAl.AnnoMatricula = datatable.Rows[i][0].ToString();
+                            NiAl.CantidadNinnos = Int32.Parse(datatable.Rows[i][1].ToString());
+                            listaNinnosMat.Add(NiAl);
+                        }
+
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaNinnosMat;
+        }
+
+        public IActionResult ConsNinnosMatriculados()
+        {
+            return View(ListarNinnosMatriculados());
+        }
+
+        // Consulta
+
+        public List<NinnosPlatoAlergicos> ListarNinnosPlatoAlergicos()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_NinnosPlatosAlergicos", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            NinnosPlatoAlergicos NiAl = new NinnosPlatoAlergicos();
+                            NiAl.nombrePlato = datatable.Rows[i][0].ToString();
+                            NiAl.niñosalergicosalplato = Int32.Parse(datatable.Rows[i][1].ToString());
+                            listaPlatosA.Add(NiAl);
+                        }
+
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaPlatosA;
+        }
+
+        public IActionResult ConsNinnosPlatoAlergicos()
+        {
+            return View(ListarNinnosPlatoAlergicos());
+        }
+
+
+
+        // Consulta
+
+        public List<NinnosResidencia> ListarNinnosResidencia()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_NinnosResidencia", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            NinnosResidencia NiAl = new NinnosResidencia();
+                            NiAl.direccionNinno = datatable.Rows[i][0].ToString();
+                            NiAl.Ninnos = Int32.Parse(datatable.Rows[i][1].ToString());
+                            listaNinnos.Add(NiAl);
+                        }
+
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaNinnos;
+        }
+
+        public IActionResult ConsNinnosResidencia()
+        {
+            return View(ListarNinnosResidencia());
+        }
+        // Consulta
+
+        public List<NinnasResidencia> ListarNinnasResidencia()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_NinnasResidencia", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            NinnasResidencia NiAl = new NinnasResidencia();
+                            NiAl.direccionNinno = datatable.Rows[i][0].ToString();
+                            NiAl.Ninnos = Int32.Parse(datatable.Rows[i][1].ToString());
+                            listaNinnas.Add(NiAl);
+                        }
+
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaNinnas;
+        }
+
+        public IActionResult ConsNinnasResidencia()
+        {
+            return View(ListarNinnasResidencia());
+        }
+
+
+        //Listar
         public List<NinnoGenero> ListarNinno()
         {
             DataTable datatable = new DataTable();

@@ -8,11 +8,14 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
-
+using WebNinnoFeliz.Models.ViewModels;
+using System.Data;
 namespace WebNinnoFeliz.Controllers
 {
     public class NaiPlatoController : Controller
     {
+        List<ListarNAI_Platos> listaNAi = new List<ListarNAI_Platos>();
+        SqlDataAdapter adapter;
         private readonly WebNinnoFelizContext _context;
 
         public NaiPlatoController(WebNinnoFelizContext context)
@@ -20,11 +23,55 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        // GET: NaiPlato
-        public async Task<IActionResult> Index()
+        //Listar
+        public List<ListarNAI_Platos> ListarListarNAIPlatos()
         {
-            var webNinnoFelizContext = _context.NaiPlatos.Include(n => n.IdNinnoAlergiaIngredienteNavigation).Include(n => n.IdPlatoNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarNAI_Platos", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            ListarNAI_Platos ninno = new ListarNAI_Platos();
+                            ninno.IdNaiplato = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.IdentificacionNinno = datatable.Rows[i][1].ToString();
+                            ninno.NombreNinno = datatable.Rows[i][2].ToString();
+                            ninno.Apell1Ninno = datatable.Rows[i][3].ToString();
+                            ninno.Apell2Ninno = datatable.Rows[i][4].ToString();
+                            ninno.NombreAlergia = datatable.Rows[i][5].ToString();
+                            ninno.NombreIngrediente = datatable.Rows[i][6].ToString();
+                            ninno.NombrePlato = datatable.Rows[i][7].ToString();
+                            listaNAi.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaNAi;
+        }
+
+        // GET: Alergia
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarListarNAIPlatos());
         }
 
         // GET: NaiPlato/Details/5

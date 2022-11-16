@@ -15,6 +15,7 @@ namespace WebNinnoFeliz.Controllers
 {
     public class TipoAlergiaController : Controller
     {
+        List<TipoAlergia> listaTipoAlergia = new List<TipoAlergia>();
         List<NinnosAlergicos> listaninnosalergicos = new List<NinnosAlergicos>();
         SqlDataAdapter adapter;
 
@@ -23,6 +24,52 @@ namespace WebNinnoFeliz.Controllers
         public TipoAlergiaController(WebNinnoFelizContext context)
         {
             _context = context;
+        }
+           
+
+        //Listar
+        public List<TipoAlergia> ListarTipoAlergia()
+        {
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listartipoAlergias", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            TipoAlergia ninno = new TipoAlergia();
+                            ninno.IdTipoAlergia = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.NombreTipoAlergia = datatable.Rows[i][1].ToString();
+                            listaTipoAlergia.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaTipoAlergia;
+        }
+
+         // GET: TipoAlergia
+      
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarTipoAlergia());
         }
 
         // Consulta
@@ -69,11 +116,7 @@ namespace WebNinnoFeliz.Controllers
             return View(ListarNinnosAlergicos());
         }
 
-        // GET: TipoAlergia
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.TipoAlergias.ToListAsync());
-        }
+      
 
         // GET: TipoAlergia/Details/5
         public async Task<IActionResult> Details(int? id)

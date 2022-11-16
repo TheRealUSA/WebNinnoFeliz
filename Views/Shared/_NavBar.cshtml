@@ -13,16 +13,25 @@
         </li>*@
         @*<partial name="_LoginPartial" />*@
 
-
+        <a class="nav-link text-white" asp-area="" asp-controller="Genero" asp-action="ConsHistorico">Historico </a>
     </ul>
     
   
     <div class="dropdown">
         <a class="text-white dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Consultas
-        </a>
+        </a>  
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="nav-link text-dark" asp-area="" asp-controller="ConsParentezco" asp-action="Index">Consulta Parentezco</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="TipoAlergia" asp-action="ConsNinnosAlergicos">NinnoAlergicos</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Plato" asp-action="ConsCostePlatos">CostoPlatos</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosResidencia">Niños Residencia</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnasResidencia">Niñas Residencia</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosPlatoAlergicos">Niños alergicos</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosMatriculados">Matriculas </a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosDadosBaja">Bajas </a>
+            
+
         </div>
     </div>
     <!-- SEARCH FORM -->
