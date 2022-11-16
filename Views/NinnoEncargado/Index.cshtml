@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.NinnoEncargado>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.NinnoEncargados>
 
 @{
     ViewData["Title"] = "Index";
@@ -40,7 +40,8 @@
                 @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
             </th>
             <th>
-                <a class="nav-link text-white" asp-area="" asp-controller="Parentezco" asp-action="Index">Parentezco</a>
+                Parentezco
+                @*@Html.DisplayNameFor(model => model.IdNinnoNavigation)*@
             </th>
             <th>
                 Nombre niño
@@ -65,28 +66,28 @@
                     @Html.DisplayFor(modelItem => item.IdNinnoEncargado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)
+                    @Html.DisplayFor(modelItem => item.IdentificacionEncargado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
+                    @Html.DisplayFor(modelItem => item.NombreEncargado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
+                    @Html.DisplayFor(modelItem => item.Apell1Encargado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado)
+                    @Html.DisplayFor(modelItem => item.Apell2Encargado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdParentezco)
+                    @Html.DisplayFor(modelItem => item.DetallePar)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
+                    @Html.DisplayFor(modelItem => item.NombreNinno)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
+                    @Html.DisplayFor(modelItem => item.Apell1Ninno)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
+                    @Html.DisplayFor(modelItem => item.Apell2Ninno)
                 </td>
 
                 <td>

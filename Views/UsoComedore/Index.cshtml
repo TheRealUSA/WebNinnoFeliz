@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.UsoComedore>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.UsoComedorNinnoMes>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,7 +20,8 @@
     <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdUsoComedor)
+                IdUsoComedor
+                @*@Html.DisplayNameFor(model => model.IdUsoComedor)*@
             </th>
             <th>
                 Cantidad de Días
@@ -40,45 +41,45 @@
             <th>Acciones</th>
         </tr>
     </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdUsoComedor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CantidadDias)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdMesNavigation.NombreMes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdUsoComedor" class="btn btn-success">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdUsoComedor" class="btn btn-info">Detalle</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdUsoComedor" class="btn btn-danger">Borrar</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdUsoComedor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CantidadDias)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreMes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NombreNinno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Apell1Ninno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Apell2Ninno)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdUsoComedor" class="btn btn-success">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.IdUsoComedor" class="btn btn-info">Detalle</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdUsoComedor" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-@section Scripts
-{
-    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
-    <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#Tabla').DataTable();
-        });
-    </script>
-}
+        @section Scripts
+        {
+            <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+            <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('#Tabla').DataTable();
+                });
+            </script>
+        }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.CargoMensuale>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.AbonadorUsoComedor>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,16 +20,19 @@
     <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdCargo)
+                ID Cargo
             </th>
             <th>
                 CargoMensual
             </th>
             <th>
-                IdUsoComedor
+                NombreNiño
             </th>
             <th>
-                IdNiño
+                Apell1Niño
+            </th>
+            <th>
+                Apell2Niño
             </th>
             <th>Acciones</th>
         </tr>
@@ -37,25 +40,28 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdCargo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CargoMensual)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdUsoComedorNavigation.IdUsoComedor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdUsoComedorNavigation.IdNinno)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdCargo" class="btn btn-success">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdCargo" class="btn btn-info">Detalle</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdCargo" class="btn btn-danger">Borrar</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCargo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CargoMensual)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell1Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell2Ninno)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdCargo" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdCargo" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCargo" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +9,16 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
 
 namespace WebNinnoFeliz.Controllers
 {
     public class AbonadorCargoMensualeController : Controller
     {
+
+        List<AbonadorCargoMensual> listaAbonaCargoMen = new List<AbonadorCargoMensual>();
+        SqlDataAdapter adapter;
+
         private readonly WebNinnoFelizContext _context;
 
         public AbonadorCargoMensualeController(WebNinnoFelizContext context)
@@ -20,11 +26,54 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        // GET: AbonadorCargoMensuale
-        public async Task<IActionResult> Index()
+        public List<AbonadorCargoMensual> ListarAbonaCargoMen()
         {
-            var webNinnoFelizContext = _context.AbonadorCargoMensuales.Include(a => a.IdAbonadorNavigation).Include(a => a.IdCargoNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarAbonador_CargoMensuales", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            AbonadorCargoMensual ninno = new AbonadorCargoMensual();
+                            ninno.IdAbonadorCargoMensual = Int32.Parse(datatable.Rows[i][0].ToString());
+                            ninno.NombreEncargado = datatable.Rows[i][1].ToString();
+                            ninno.Apell1Encargado = datatable.Rows[i][2].ToString();
+                            ninno.Apell2Encargado = datatable.Rows[i][3].ToString();
+                            ninno.NumeroCuenta = Int32.Parse(datatable.Rows[i][4].ToString());
+                            ninno.CargoMensual = datatable.Rows[i][5].ToString();
+                            ninno.NombreNinno = datatable.Rows[i][6].ToString();
+                            ninno.Apell1Ninno = datatable.Rows[i][7].ToString();
+                            ninno.Apell2Ninno = datatable.Rows[i][8].ToString();
+                            listaAbonaCargoMen.Add(ninno);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaAbonaCargoMen;
+        }
+
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
+            return View(ListarAbonaCargoMen());
         }
 
         // GET: AbonadorCargoMensuale/Details/5

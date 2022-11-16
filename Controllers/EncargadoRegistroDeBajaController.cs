@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +9,16 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
 
 namespace WebNinnoFeliz.Controllers
 {
     public class EncargadoRegistroDeBajaController : Controller
     {
+
+        List<EncargadoRegistroBajas> listaencreg = new List<EncargadoRegistroBajas>();
+        SqlDataAdapter adapter;
+
         private readonly WebNinnoFelizContext _context;
 
         public EncargadoRegistroDeBajaController(WebNinnoFelizContext context)
@@ -20,11 +26,56 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        // GET: EncargadoRegistroDeBaja
-        public async Task<IActionResult> Index()
+        public List<EncargadoRegistroBajas> ListaEncargadoRegistro()
         {
-            var webNinnoFelizContext = _context.EncargadoRegistroDeBajas.Include(e => e.IdEncargadoNavigation).Include(e => e.IdRegistroBajaNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarEncargado_RegistroBajas", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            EncargadoRegistroBajas encargado = new EncargadoRegistroBajas();
+                            encargado.IdEncargadoRegistroBaja = Int32.Parse(datatable.Rows[i][0].ToString());
+                            encargado.IdRegistroBaja = Int32.Parse(datatable.Rows[i][1].ToString());
+                            encargado.IdentificacionEncargado = datatable.Rows[i][2].ToString();
+                            encargado.NombreEncargado = datatable.Rows[i][3].ToString();
+                            encargado.Apell1Encargado = datatable.Rows[i][4].ToString();
+                            encargado.Apell2Encargado = datatable.Rows[i][5].ToString();
+                            encargado.DetallePar = datatable.Rows[i][6].ToString();
+                            encargado.FechaIngreso = DateTime.Parse(datatable.Rows[i][7].ToString());
+                            encargado.NombreNinno = datatable.Rows[i][8].ToString();
+                            encargado.Apell1Ninno = datatable.Rows[i][9].ToString();
+                            encargado.Apell2Ninno = datatable.Rows[i][10].ToString();
+                            listaencreg.Add(encargado);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaencreg;
+        }
+
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Encargados.Include(e => e.IdParentezcoNavigation);
+            return View(ListaEncargadoRegistro());
         }
 
         // GET: EncargadoRegistroDeBaja/Details/5

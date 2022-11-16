@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.Abonadore>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.AbonadorEncargado>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,7 +20,7 @@
     <thead class="table-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdAbonador)
+                IdAbonador
             </th>
             <th>
                 NumeroCuenta
@@ -35,7 +35,7 @@
                 Apell1Encargado
             </th>
             <th>
-                Id Encargado
+                Apell2Encargado
             </th>
             <th>Acciones</th>
         </tr>
@@ -51,16 +51,16 @@
                     @Html.DisplayFor(modelItem => item.NumeroCuenta)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)
+                    @Html.DisplayFor(modelItem => item.IdentificacionEncargado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
+                    @Html.DisplayFor(modelItem => item.NombreEncargado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
+                    @Html.DisplayFor(modelItem => item.Apell1Encargado)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdParentezco)
+                    @Html.DisplayFor(modelItem => item.Apell2Encargado)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.IdAbonador" class="btn btn-success">Editar</a> |
