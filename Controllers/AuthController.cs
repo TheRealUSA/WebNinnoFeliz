@@ -13,8 +13,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Utilidades;
 
-namespace GuanaHospi.Controllers
+namespace WebNinnoFeliz.Controllers
 {
     public class AuthController : Controller
     {
@@ -30,99 +31,62 @@ namespace GuanaHospi.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
 
         [HttpPost]
-        public IActionResult Register(Usuario usuario)
+        public async Task<IActionResult> Login(Usuario _usuario)
         {
-            bool registrado;
-            string mensaje;
 
-            if (usuario.Contrasenna == usuario.ConfirmarContrasenna)
+
+
+            SD sd = new SD();
+
+
+
+            var usuario = sd.ValidarUsuario(_usuario.CorreoElectronico, _usuario.Contrasenna);
+
+
+
+            if (usuario != null)
             {
-                usuario.Contrasenna = HashearContrasennas(usuario.Contrasenna);
-            }
-            else
-            {
-                ViewData["Mensaje"] = "Las contraseñas no coinciden";
-            }
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, usuario.NombreUsuario),
+                    new Claim("CorreoElectronico", usuario.CorreoElectronico),
+                };
+                foreach (string rol in usuario.Roles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, rol));
+                }
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            using (SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection())
-            {
-                SqlCommand cmd = conn.CreateCommand();
-                conn.Open();
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "Sp_RegistrarUsuario";
-                cmd.Parameters.AddWithValue("NombreUsuario", usuario.NombreUsuario);
-                cmd.Parameters.AddWithValue("CorreoElectronico", usuario.CorreoElectronico);
-                cmd.Parameters.AddWithValue("Contrasenna", usuario.Contrasenna);
-                cmd.Parameters.Add("Registrado", System.Data.SqlDbType.Bit).
-                Direction = System.Data.ParameterDirection.Output;
-                cmd.Parameters.Add("Mensaje", System.Data.SqlDbType.VarChar, 50).
-                Direction = System.Data.ParameterDirection.Output;
 
-                cmd.ExecuteNonQuery();
 
-                registrado = Convert.ToBoolean(cmd.Parameters["Registrado"].Value);
-                mensaje = cmd.Parameters["Mensaje"].Value.ToString();
-            }
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-            ViewData["Mensaje"] = mensaje;
 
-            if (registrado)
-            {
 
-                return RedirectToAction("Login", "Auth");
-            }
-            else
-            {
-                return View();
-            }
-        }
-        [HttpPost]
-        public IActionResult Login(Usuario usuario)
-        {
-            usuario.Contrasenna = HashearContrasennas(usuario.Contrasenna);
-            SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
-            SqlCommand cmd = conn.CreateCommand();
-            conn.Open();
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.CommandText = "Sp_ValidarUsuario";
-            cmd.Parameters.Add("@Correo", System.Data.SqlDbType.VarChar, 50).Value = usuario.CorreoElectronico;
-            cmd.Parameters.Add("@Contrasenna", System.Data.SqlDbType.VarChar, 100).Value = usuario.Contrasenna;
 
-            usuario.Id = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-            conn.Close();
-            if (usuario.Id != 0)
-            {
-                //var claims = new List<Claim>
-                //{
-                //    new Claim(ClaimTypes.Name, usuario.NombreUsuario),
-                //    new Claim("Correo",usuario.CorreoElectronico)
-                //};
-                //foreach(string rol in usuario.Roles)
-                //{
-                //    claims.Add(new Claim(ClaimTypes.Role, rol));
-                //}
-                //var claimsidentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsidentity));
-                 HttpContext.Session.SetInt32("Usuario", usuario.Id);
                 return RedirectToAction("Index", "Home");
-
             }
             else
             {
                 ViewData["Mensaje"] = "Usuario no encontrado";
                 return View();
-
             }
 
 
-            
+
+        }
+
+
+
+        public async Task<IActionResult> CerrarSesionAsync()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Inicio", "Index");
+
+
+
         }
         public IActionResult CerrarSesion()
         {

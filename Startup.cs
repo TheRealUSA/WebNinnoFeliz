@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,7 +32,17 @@ namespace WebNinnoFeliz
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(option => {
+                option.LoginPath = "/Auth/Login";
+                option.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                option.AccessDeniedPath = "/Home/Privacy";
+            });
         }
+
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -52,15 +63,15 @@ namespace WebNinnoFeliz
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                //pattern: "{controller=Auth}/{action=Login}/{id?}");
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-                //pattern: "{controller=Inicio}/{action=Index}/{id?}");
-            });
+        //pattern: "{controller=Auth}/{action=Login}/{id?}");
+        //pattern: "{controller=Home}/{action=Index}/{id?}");
+        pattern: "{controller=Inicio}/{action=Index}/{id?}");
+        });
 
             Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "../Rotativa");
         }

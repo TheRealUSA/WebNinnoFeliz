@@ -78,10 +78,10 @@ namespace WebNinnoFeliz.Controllers
         }
 
 
-        public async Task<IActionResult> PDF()
+        public IActionResult PDF()
         {
-            return new ViewAsPdf(await _context.NinnoEncargados.Include(n => n.IdEncargadoNavigation).Include(n => n.IdNinnoNavigation).ToListAsync())
-            {
+            return new ViewAsPdf(ListarNinnoEncargado())
+            { 
                 FileName = "NiñoEncargado.pdf"
             };
         }
