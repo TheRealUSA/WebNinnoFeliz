@@ -7,9 +7,15 @@
 
 <h1>Consulta Parentezco</h1>
 
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
 <table class="table">
     <thead class="table-dark">
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdParentezco)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DetallePar)
             </th>
@@ -18,6 +24,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdParentezco)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DetallePar)
             </td>

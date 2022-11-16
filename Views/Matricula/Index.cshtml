@@ -7,8 +7,17 @@
 
 <h1>Tabla de matricula</h1>
 
+<form asp-controller="Matricula" asp-action="Index">
+    <p>
+        Busacar por Detalle: <input type="text" name="buscar" class="form-text" />
+        <br />
+        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+    </p>
+
+</form>
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    <a asp-action="PDF" class="btn btn-primary">PDF</a>
 </p>
 <table class="table">
     <thead class="table-dark">
@@ -44,10 +53,10 @@
                 @Html.DisplayFor(modelItem => item.FechaIngreso)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.IdentificacionNinno)
+                @Html.DisplayFor(modelItem => item.IdNinno)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno) 
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
 
@@ -25,6 +26,17 @@ namespace WebNinnoFeliz.Controllers
         {
             var webNinnoFelizContext = _context.Ninnos.Include(n => n.IdGeneroNavigation);
             return View(await webNinnoFelizContext.ToListAsync());
+        }
+
+        //PDF
+
+        public async Task<IActionResult> PDF()
+        {
+            //return View(await _context.Parentezcos.ToListAsync());
+            return new ViewAsPdf(await _context.Ninnos.ToListAsync())
+            {
+                FileName = "Ninnos.pdf"
+            }; 
         }
 
         // GET: Ninno/Details/5

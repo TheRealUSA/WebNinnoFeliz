@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.Abonadore> 
+@{
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_Sty.cshtml"; 
+}
+
+<h1>Reporte de Abonadores</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAbonador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroCuenta) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEncargadoNavigation.IdentificacionEncargado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEncargadoNavigation.NombreEncargado)
+            </th>
+           <th>
+            @Html.DisplayNameFor(model => model.IdEncargadoNavigation.Apell1Encargado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdEncargadoNavigation.Apell2Encargado)
+        </th> 
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdAbonador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroCuenta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado) 
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

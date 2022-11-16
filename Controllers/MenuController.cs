@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
 
@@ -24,6 +25,17 @@ namespace WebNinnoFeliz.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Menus.ToListAsync());
+        }
+
+        //PDF
+
+        public async Task<IActionResult> PDF()
+        {
+            //return View(await _context.Parentezcos.ToListAsync());
+            return new ViewAsPdf(await _context.Menus.ToListAsync())
+            {
+                FileName = "Menú.pdf"
+            };
         }
 
         // GET: Menu/Details/5

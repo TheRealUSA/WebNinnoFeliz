@@ -7,17 +7,26 @@
 
 <h1>Tabla de asistencia</h1>
 
+<form asp-controller="Asistencia" asp-action="Index">
+    <p>
+        Busacar por Detalle: <input type="text" name="buscar" class="form-text" />
+        <br />
+        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+    </p>
+
+</form>
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    <a asp-action="PDF" class="btn btn-primary">PDF</a>
 </p>
 <table class="table">
     <thead class="table-dark">
         <tr>
             <th>
-                Id Asistencia
+                @Html.DisplayNameFor(model => model.IdAsistencia)
             </th>
             <th>
-                Fecha de asitencia
+                @Html.DisplayNameFor(model => model.FechaAsist) 
             </th>
             <th>
                 Estado
@@ -26,10 +35,14 @@
                 Identificacion
             </th>
             <th>
-                Nombre Niño
+                NombreNiño
             </th>
-            <th>Apellido1 Niño</th>
-            <th>Apellido2 Niño</th>
+            <th>
+                Apellido1Niño
+            </th>
+            <th>
+                Apellido2Niño
+            </th>
             <th>Acciones</th>
         </tr>
     </thead>

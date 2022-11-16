@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Rotativa.AspNetCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
 
@@ -20,11 +21,23 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
+
         // GET: Abonadore
         public async Task<IActionResult> Index()
         {
             var webNinnoFelizContext = _context.Abonadores.Include(a => a.IdEncargadoNavigation);
             return View(await webNinnoFelizContext.ToListAsync());
+        }
+
+        //PDF
+
+        public async Task<IActionResult> PDF()
+        {
+            //return View(await _context.Parentezcos.ToListAsync());
+            return new ViewAsPdf(await _context.Abonadores.Include(a => a.IdEncargadoNavigation).ToListAsync())
+            {
+                FileName = "Abonadores.pdf"
+            };
         }
 
         // GET: Abonadore/Details/5

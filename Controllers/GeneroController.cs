@@ -20,11 +20,38 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        // GET: Genero
+        //GET: Genero
         public async Task<IActionResult> Index()
         {
             return View(await _context.Generos.ToListAsync());
         }
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Index([Bind("IdGenero,DetalleGen")] Genero genero)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+        //        SqlCommand cmd = conn.CreateCommand();
+        //        conn.Open();
+        //        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //        cmd.CommandText = "sp_BuscarGenero";
+        //        cmd.Parameters.Add("@detalleGen", System.Data.SqlDbType.VarChar, 15).Value = genero.DetalleGen;
+        //        await cmd.ExecuteNonQueryAsync();
+        //        conn.Close();
+        //        // _context.Add(genero);
+        //        //await _context.SaveChangesAsync();
+        //        //return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(genero);
+        //}
+
 
         // GET: Genero/Details/5
         public async Task<IActionResult> Details(int? id)

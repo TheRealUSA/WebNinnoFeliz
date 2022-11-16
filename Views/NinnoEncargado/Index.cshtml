@@ -7,15 +7,29 @@
 
 <h1>Tabla de niños y su encargados</h1>
 
+<form asp-controller="NinnoEncargado" asp-action="Index">
+    <p>
+        Busacar por Detalle: <input type="text" name="buscar" class="form-text" />
+        <br />
+        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+    </p>
+
+</form>
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    <a asp-action="PDF" class="btn btn-primary">PDF</a>
 </p>
 <table class="table">
     <thead class="table-dark">
         <tr>
             <th>
-                IdNiñoEncargado
-                @*@Html.DisplayNameFor(model => model.IdNinnoEncargado)*@
+                @Html.DisplayNameFor(model => model.IdNinnoEncargado)
+            </th>
+            <th>
+                IdEncargado
+            </th>
+            <th>
+                IdNiño
             </th>
             <th>
                 Identificacion Encargado
@@ -33,7 +47,7 @@
                 Apellido2 Encargado
                 @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
             </th>
-            <th> 
+            <th>
                 <a class="nav-link text-white" asp-area="" asp-controller="Parentezco" asp-action="Index">Parentezco</a>
             </th>
             <th>
@@ -57,6 +71,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.IdNinnoEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinno)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)

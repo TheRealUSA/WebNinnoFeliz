@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.MenuPlato>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tabla menú plato</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                Id número menu plato
+            </th>
+            <th>
+                Nombre plato
+            </th>
+            <th>
+                Nombre menú
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdnumeroMenuPlato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNumeroMenuNavigation.NombreMenu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdPlatoNavigation.NombrePlato)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdnumeroMenuPlato" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdnumeroMenuPlato" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdnumeroMenuPlato" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

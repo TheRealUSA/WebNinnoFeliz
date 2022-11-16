@@ -7,14 +7,23 @@
 
 <h1>Tabla de niño</h1>
 
+<form asp-controller="Ninno" asp-action="Index">
+    <p>
+        Busacar por Detalle: <input type="text" name="buscar" class="form-text" />
+        <br />
+        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+    </p>
+
+</form>
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+    <a asp-action="PDF" class="btn btn-primary">PDF</a>
 </p>
 <table class="table">
     <thead class="table-dark">
         <tr>
             <th>
-                IdNiño
+                @Html.DisplayNameFor(model => model.IdNinno)
             </th>
             <th>
                 IdentificacionNiño
@@ -71,7 +80,7 @@
                 @Html.DisplayFor(modelItem => item.DireccionNinno)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdGeneroNavigation.DetalleGen)
+                @Html.DisplayFor(modelItem => item.IdGenero)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IdNinno" class="btn btn-success">Editar</a> |

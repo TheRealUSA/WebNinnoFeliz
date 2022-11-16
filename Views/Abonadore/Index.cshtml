@@ -7,6 +7,14 @@
 
 <h1>Tabla de Abonadores</h1>
 
+<form asp-controller="Abonadore" asp-action="Index">
+    <p>
+        Busacar por Detalle: <input type="text" name="buscar" class="form-text" />
+        <br />
+        <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+    </p>
+
+</form>
 <p>
     <a asp-action="Create" class="btn btn-primary">Nuevo</a>
     <a asp-action="PDF" class="btn btn-primary">PDF</a>

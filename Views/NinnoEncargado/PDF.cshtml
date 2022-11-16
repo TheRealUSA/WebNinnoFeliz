@@ -1,0 +1,81 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.NinnoEncargado> 
+@{
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_Sty.cshtml";
+}
+
+<h1>Reporte Niño Encargado</h1> 
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNinnoEncargado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEncargadoNavigation.IdentificacionEncargado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNinnoNavigation.IdentificacionNinno) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEncargadoNavigation.NombreEncargado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEncargadoNavigation.Apell1Encargado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEncargadoNavigation.Apell2Encargado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdEncargadoNavigation.IdParentezco) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNinnoNavigation.NombreNinno) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNinnoNavigation.Apell1Ninno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNinnoNavigation.Apell2Ninno)
+            </th>  
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.IdentificacionNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdParentezco) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.NombreNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell1Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinnoNavigation.Apell2Ninno) 
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

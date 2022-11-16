@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.Ninno>
+@{
+    ViewData["Title"] = "PDF";
+    Layout = "~/Views/Shared/_Sty.cshtml";
+}
+
+<h1>Reporte de Niños</h1>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNinno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentificacionNinno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreNinno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apell1Ninno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apell2Ninno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaNacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DireccionNinno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdGenero)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentificacionNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell1Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell2Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DireccionNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdGenero)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+

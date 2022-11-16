@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.Abonadore>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Consulta de Abonadores</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdAbonador)
+            </th>
+            <th>
+                NumeroCuenta
+            </th>
+            <th>
+                IdEncargado
+            </th>
+            <th>
+                NombreEncargado
+            </th>
+            <th>
+                Apell1Encargado
+            </th>
+            <th>
+                Apell2Encargado
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdAbonador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroCuenta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdAbonador" class="btn btn-success">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdAbonador" class="btn btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
