@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNinnoFeliz.Models.EncargadoMatricula>
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.EncargadoMatriculas>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,6 +22,9 @@
                 IdEncargadoMatricula
             </th>
             <th>
+                Numero matricula
+            </th>
+            <th>
                 Identificacion Encargado
             </th>
             <th>
@@ -40,51 +43,61 @@
                 Fecha Ingreso
             </th>
             <th>
-                ID Niño
+                Nombre niño
             </th>
             <th>
-                Numero matricula
+                Apellido1 niño
             </th>
+            <th>
+                Apellido2 niño
+            </th>
+
             <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoMatricula)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdentificacionEncargado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.NombreEncargado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell1Encargado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.Apell2Encargado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdEncargadoNavigation.IdParentezco)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumeroMatriculaNavigation.FechaIngreso)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumeroMatriculaNavigation.IdNinno)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumeroMatricula)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdEncargadoMatricula" class="btn btn-success">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdEncargadoMatricula" class="btn btn-info">Detalle</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdEncargadoMatricula" class="btn btn-danger">Borrar</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdEncargadoMatricula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroMatricula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdentificacionEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreEncargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell1Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell2Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DetallePar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaIngreso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreNinno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell1Ninno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apell2Ninno)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdEncargadoMatricula" class="btn btn-success">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdEncargadoMatricula" class="btn btn-info">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdEncargadoMatricula" class="btn btn-danger">Borrar</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,11 +9,16 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WebNinnoFeliz.Data;
 using WebNinnoFeliz.Models;
+using WebNinnoFeliz.Models.ViewModels;
 
 namespace WebNinnoFeliz.Controllers
 {
     public class EncargadoMatriculaController : Controller
     {
+
+        List<EncargadoMatriculas> listaencmatr = new List<EncargadoMatriculas>();
+        SqlDataAdapter adapter;
+
         private readonly WebNinnoFelizContext _context;
 
         public EncargadoMatriculaController(WebNinnoFelizContext context)
@@ -20,11 +26,56 @@ namespace WebNinnoFeliz.Controllers
             _context = context;
         }
 
-        // GET: EncargadoMatricula
-        public async Task<IActionResult> Index()
+        public List<EncargadoMatriculas> ListaEncargadoMatr()
         {
-            var webNinnoFelizContext = _context.EncargadoMatriculas.Include(e => e.IdEncargadoNavigation).Include(e => e.NumeroMatriculaNavigation);
-            return View(await webNinnoFelizContext.ToListAsync());
+            DataTable datatable = new DataTable();
+            string error;
+            try
+            {
+                SqlConnection conn = (SqlConnection)_context.Database.GetDbConnection();
+                adapter = new SqlDataAdapter("sp_listarEncargado_Matriculas", conn);
+                using (adapter)
+                {
+                    conn.Open();
+                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    adapter.Fill(datatable);
+                    int tamanno = datatable.Rows.Count;
+                    if (tamanno > 0)
+                    {
+                        for (int i = 0; i < tamanno; i++)
+                        {
+                            EncargadoMatriculas encargado = new EncargadoMatriculas();
+                            encargado.IdEncargadoMatricula = Int32.Parse(datatable.Rows[i][0].ToString());
+                            encargado.NumeroMatricula = Int32.Parse(datatable.Rows[i][1].ToString());
+                            encargado.IdentificacionEncargado = datatable.Rows[i][2].ToString();
+                            encargado.NombreEncargado = datatable.Rows[i][3].ToString();
+                            encargado.Apell1Encargado = datatable.Rows[i][4].ToString();
+                            encargado.Apell2Encargado = datatable.Rows[i][5].ToString();
+                            encargado.DetallePar = datatable.Rows[i][6].ToString();
+                            encargado.FechaIngreso = DateTime.Parse(datatable.Rows[i][7].ToString());
+                            encargado.NombreNinno = datatable.Rows[i][8].ToString();
+                            encargado.Apell1Ninno = datatable.Rows[i][9].ToString();
+                            encargado.Apell2Ninno = datatable.Rows[i][10].ToString();
+                            listaencmatr.Add(encargado);
+                        }
+                    }
+                    conn.Close();
+                }
+
+            }
+            catch (Exception e)
+            {
+                error = e.InnerException.Message;
+            }
+
+            return listaencmatr;
+        }
+
+
+        public IActionResult Index()
+        {
+            //var webNinnoFelizContext = _context.Encargados.Include(e => e.IdParentezcoNavigation);
+            return View(ListaEncargadoMatr());
         }
 
         // GET: EncargadoMatricula/Details/5
