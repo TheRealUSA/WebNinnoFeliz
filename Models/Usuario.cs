@@ -22,6 +22,8 @@ namespace WebNinnoFeliz.Models
         [Required]
         [StringLength(100)]
         public string Contrasenna { get; set; }
-        public string ConfirmarContrasenna { get; set; }
+        //public string ConfirmarContrasenna { get; set; }
+        [NotMapped]
+        public string[] Roles { get; internal set; }
     }
 }

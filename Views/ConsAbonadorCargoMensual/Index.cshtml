@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.AbonadorCargoMensual>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <link href="~/lib/datatables.net-bs4/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+
+<h1>Bienvenido</h1>
+<h2>Esta a punto de hacer una pago mensual</h2>
+<h3>Presiones el boton nuevo, para iniciar su pago</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nuevo</a>
+</p>
+
+@section Scripts
+{
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Tabla').DataTable();
+        });
+    </script>
+}

@@ -1,49 +1,47 @@
 ﻿@model IEnumerable<WebNinnoFeliz.Models.ViewModels.NinnoEncargados>
+
 @{
-    ViewData["Title"] = "PDF";
-    Layout = "~/Views/Shared/_Sty.cshtml";
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>PDF de niños y su encargados</h1>
+@section Styles
+{
+    <link href="~/lib/datatables.net-bs4/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
 
-<table class="table">
+<h1>Tabla de niños y su encargados</h1>
+
+
+<table id="Tabla" class="table">
     <thead class="table-dark">
         <tr>
             <th>
                 IdNiñoEncargado
-                @*@Html.DisplayNameFor(model => model.IdNinnoEncargado)*@
             </th>
             <th>
                 Identificacion Encargado
-                @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
             </th>
             <th>
                 Nombre Encargado
-                @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
             </th>
             <th>
                 Apellido1 Encargado
-                @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
             </th>
             <th>
                 Apellido2 Encargado
-                @*@Html.DisplayNameFor(model => model.IdEncargadoNavigation)*@
             </th>
             <th>
                 Parentezco
-                @*@Html.DisplayNameFor(model => model.IdNinnoNavigation)*@
             </th>
             <th>
                 Nombre niño
-                @*@Html.DisplayNameFor(model => model.IdNinnoNavigation)*@
             </th>
             <th>
                 Apellido1 niño
-                @*@Html.DisplayNameFor(model => model.IdNinnoNavigation)*@
             </th>
             <th>
                 Apellido2 niño
-                @*@Html.DisplayNameFor(model => model.IdNinnoNavigation)*@
             </th>
         </tr>
     </thead>
@@ -78,8 +76,19 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Apell2Ninno)
                 </td>
-
             </tr>
         }
     </tbody>
 </table>
+
+@section Scripts
+{
+    <script src="~/lib/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/lib/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#Tabla').DataTable();
+        });
+    </script>
+}
+

@@ -99,7 +99,7 @@ namespace WebNinnoFeliz.Controllers
         // GET: AbonadorCargoMensuale/Create
         public IActionResult Create()
         {
-            ViewData["IdAbonador"] = new SelectList(_context.Abonadores, "IdAbonador", "IdAbonador");
+            ViewData["IdAbonador"] = new SelectList(_context.Abonadores, "IdAbonador", "NumeroCuenta");
             ViewData["IdCargo"] = new SelectList(_context.CargoMensuales, "IdCargo", "IdCargo");
             return View();
         }
@@ -127,7 +127,7 @@ namespace WebNinnoFeliz.Controllers
                 //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAbonador"] = new SelectList(_context.Abonadores, "IdAbonador", "IdAbonador", abonadorCargoMensuale.IdAbonador);
+            ViewData["IdAbonador"] = new SelectList(_context.Abonadores, "IdAbonador", "NumeroCuenta", abonadorCargoMensuale.IdAbonador);
             ViewData["IdCargo"] = new SelectList(_context.CargoMensuales, "IdCargo", "IdCargo", abonadorCargoMensuale.IdCargo);
             return View(abonadorCargoMensuale);
         }
@@ -145,7 +145,7 @@ namespace WebNinnoFeliz.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdAbonador"] = new SelectList(_context.Abonadores, "IdAbonador", "IdAbonador", abonadorCargoMensuale.IdAbonador);
+            ViewData["IdAbonador"] = new SelectList(_context.Abonadores, "IdAbonador", "NumeroCuenta", abonadorCargoMensuale.IdAbonador);
             ViewData["IdCargo"] = new SelectList(_context.CargoMensuales, "IdCargo", "IdCargo", abonadorCargoMensuale.IdCargo);
             return View(abonadorCargoMensuale);
         }
@@ -192,7 +192,7 @@ namespace WebNinnoFeliz.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdAbonador"] = new SelectList(_context.Abonadores, "IdAbonador", "IdAbonador", abonadorCargoMensuale.IdAbonador);
+            ViewData["IdAbonador"] = new SelectList(_context.Abonadores, "IdAbonador", "NumeroCuenta", abonadorCargoMensuale.IdAbonador);
             ViewData["IdCargo"] = new SelectList(_context.CargoMensuales, "IdCargo", "IdCargo", abonadorCargoMensuale.IdCargo);
             return View(abonadorCargoMensuale);
         }

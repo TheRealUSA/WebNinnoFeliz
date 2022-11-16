@@ -8,46 +8,44 @@
         <li class="nav-item d-none d-sm-inline-block ">
             <a href="Home/Index" class="nav-link text-white bg-dark">Inicio</a>
         </li>
-        @*<li class="nav-item d-none d-sm-inline-block">
-            <a href="Home/Privacy" class="nav-link">Privacidad</a>
-        </li>*@
-        @*<partial name="_LoginPartial" />*@
 
+    </ul>
+    @if (User.IsInRole("Administrador"))
+    {
         <a class="nav-link text-white" asp-area="" asp-controller="Genero" asp-action="ConsHistorico">Historico </a>
-    </ul>
-    
-  
-    <div class="dropdown">
-        <a class="text-white dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Consultas
-        </a>  
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="nav-link text-dark" asp-area="" asp-controller="ConsParentezco" asp-action="Index">Consulta Parentezco</a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="TipoAlergia" asp-action="ConsNinnosAlergicos">NinnoAlergicos</a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Plato" asp-action="ConsCostePlatos">CostoPlatos</a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosResidencia">Niños Residencia</a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnasResidencia">Niñas Residencia</a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosPlatoAlergicos">Niños alergicos</a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosMatriculados">Matriculas </a>
-            <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosDadosBaja">Bajas </a>
-            
 
-        </div>
-    </div>
-    <!-- SEARCH FORM -->
-    @*<form class="form-inline ml-3">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-dark" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+        <div class="dropdown">
+            <a class="text-white dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Consultas
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="nav-link text-dark" asp-area="" asp-controller="ConsParentezco" asp-action="Index">Consulta Parentezco</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="TipoAlergia" asp-action="ConsNinnosAlergicos">NinnoAlergicos</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Plato" asp-action="ConsCostePlatos">CostoPlatos</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosResidencia">Niños Residencia</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnasResidencia">Niñas Residencia</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosPlatoAlergicos">Niños alergicos</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosMatriculados">Matriculas </a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Ninno" asp-action="ConsNinnosDadosBaja">Bajas </a>
+
+
             </div>
-        </form>*@
+        </div>
+    }
+        <!-- SEARCH FORM -->
+        @*<form class="form-inline ml-3">
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-dark" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>*@
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-    </ul>
-</nav>
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+        </ul>
+    </nav>
 <!-- /.navbar -->
